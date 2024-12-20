@@ -10,6 +10,7 @@ include( "cl_hud/hud_scoreboard.lua" )
 include( "cl_hud/hud.lua" )
 
 
+---Initialize
 function GM:Initialize()
 end
 

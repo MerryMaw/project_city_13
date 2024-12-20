@@ -12,11 +12,12 @@ local drawText = surface.DrawText;
 local setDrawColor = surface.SetDrawColor;
 local drawRect = surface.DrawRect;
 
-local sw,sh = ScrW(),ScrH();
+local sh = ScrH();
 
 local barX = 50;
 local barY = sh-70;
 
+---drawHealthbar
 function drawHealthbar()
     ---@type userdata
     local pl = LocalPlayer();
@@ -35,6 +36,9 @@ function drawHealthbar()
     drawText(strCondition);
 end
 
+---getPlayerConditions
+---@param pl userdata
+---@return string,userdata
 function getPlayerConditions(pl)
     local health = pl:Health();
     local maxHealth = pl:GetMaxHealth();

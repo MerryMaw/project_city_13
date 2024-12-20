@@ -8,6 +8,9 @@ GM.Website 			= ""
 GM.Version			= 0.01
 
 
+---PlayerNoClip
+---@param pl userdata
+---@return boolean
 function GM:PlayerNoClip( pl )
 	return pl:IsAdmin();
 end
