@@ -6,22 +6,18 @@
 
 DEFINE_BASECLASS( "c13_base" );
 
-ENT.PrintName		= "C13_BASE_APPLIANCE";
+ENT.PrintName		= "C13_BASE_CONTAINER";
 ENT.Author			= "The Maw";
-ENT.Purpose			= "Provides base fundamentals for City 13 powered entities";
+ENT.Purpose			= "Provides base fundamentals for City 13 entities, which contains items";
 
 ENT.PowerRequired   = 1;
 
 ---SetupDataTables
 function ENT:SetupDataTables()
     BaseClass.SetupDataTables(self);
-    self:NetworkVar("Int", 0, "PowerUsed");
-
-    if (SERVER) then
-        self:SetPowerUsed(0);
-    end
-end
-
-function ENT:GetPowerRequired()
-    return self.PowerRequired;
+    --self:NetworkVar("Int", 0, "PowerUsed");
+    --
+    --if (SERVER) then
+    --    self:SetPowerUsed(0);
+    --end
 end
