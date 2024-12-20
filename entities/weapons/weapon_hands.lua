@@ -37,7 +37,7 @@ function SWEP:SecondaryAttack()
 end
 
 function SWEP:PreDrawViewModel( vm,pl,wep)
-	//vm:SetMaterial( "engine/occlusionproxy" )
+	--vm:SetMaterial( "engine/occlusionproxy" )
 	return true
 end
 

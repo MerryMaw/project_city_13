@@ -7,6 +7,7 @@ local hide = {
     ["CHudGeiger"] = true,
     ["CHudPoisonDamageIndicator"] = true,
     ["CHudSuitPower"] = true,
+    ["CHudWeaponSelection"] = true,
 }
 
 hook.Add("HUDShouldDraw", "HideDefaults", function(name)
