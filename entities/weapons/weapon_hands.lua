@@ -1,6 +1,7 @@
 
 AddCSLuaFile()
 
+
 SWEP.PrintName			= "Hands"
 SWEP.Author				= "The Maw"
 SWEP.Purpose    		= "Nothing"
@@ -26,11 +27,9 @@ function SWEP:Initialize()
 end
 
 function SWEP:Think()
-
 end
 
 function SWEP:PrimaryAttack()
-
 end
 
 function SWEP:SecondaryAttack()

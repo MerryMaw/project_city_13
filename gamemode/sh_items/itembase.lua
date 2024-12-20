@@ -32,7 +32,9 @@ local BASECLASS = {
         return self.Icon
     end,
 
-    init 		= function(_) end
+    init 		= function(_) end,
+
+    use         = function(_) end,
 }
 
 BASECLASS.__index = BASECLASS

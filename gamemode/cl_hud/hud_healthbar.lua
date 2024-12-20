@@ -24,7 +24,7 @@ function drawHealthbar()
     local strCondition, textColor = getPlayerConditions(pl);
 
     setDrawColor(MAIN_HEALTH_BG_COLOR);
-    drawRect(barX-10,barY-10,230,40);
+    drawRect(barX - 10,barY - 10,240,40);
 
     setFont("HealthFont");
     setTextColor(MAIN_TEXT_COLOR);

@@ -12,8 +12,11 @@ AddCSLuaFile("cl_hud/hud.lua");
 
 include( "shared.lua" )
 
+include( "sv_various/chatcommands.lua" )
+
 ---Initialize
 function GM:Initialize()
+    resource.AddFile("materials/city13/ui/heart.png");
 end
 
 ---PlayerInitialSpawn
