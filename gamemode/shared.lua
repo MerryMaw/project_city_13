@@ -1,5 +1,7 @@
 
+AddCSLuaFile("sh_items/itemloader.lua");
 
+include("sh_items/itemloader.lua");
 
 GM.Name 			= "Project City 13"
 GM.Author 			= "The Maw"

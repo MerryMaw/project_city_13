@@ -4,8 +4,11 @@
 --- DateTime: 12/20/24 9:30 PM
 ---
 
-AddCSLuaFile("baseclass.lua")
-include("baseclass.lua")
+AddCSLuaFile("itembase.lua")
+AddCSLuaFile("itemmanager.lua")
+
+include("itembase.lua")
+include("itemmanager.lua")
 
 local Folder  		= GM.Folder:gsub("gamemodes/","").."/gamemode/sh_items/class";
 
