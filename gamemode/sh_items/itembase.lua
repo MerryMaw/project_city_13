@@ -4,11 +4,58 @@
 --- DateTime: 12/20/24 9:34 PM
 ---
 
+local insert = table.insert;
+
 ---@type table
 local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
     properties = {},
+
+    weight = 1,
+    volume = 1,
+    maxVolume = 0,
+
+    isContainer = false;
+
+    -- Gets all the items in the container
+    getItems = function(self)
+        if (not self.items or not self.isContainer) then return {} end
+        return self.items;
+    end,
+
+    -- Gets the current total volume of the item and the items it contains, if any.
+    getVolume = function(self)
+        if (not self.items or not self.isContainer) then return self.volume end
+
+        local currentVolume = self.volume;
+
+        for _, item in pairs(self.items) do
+            currentVolume = currentVolume + item:getVolume();
+        end
+
+        return currentVolume;
+    end,
+
+    -- Adds items to the container and returns the leftover items, if any.
+    addItems = function(self, items)
+        if (not self.isContainer) then return items end
+        self.items = self.items or {};
+
+        local currentVolume = self:getVolume();
+
+        for id, item in pairs(items) do
+            local itemVolume = item:getVolume();
+
+            if (currentVolume + itemVolume < self.maxVolume) then
+                currentVolume = currentVolume + itemVolume;
+                insert(self.items,item);
+                items[id] = nil;
+            end
+        end
+
+        return items;
+    end,
 
     --@Model
     getModel = function(self)
