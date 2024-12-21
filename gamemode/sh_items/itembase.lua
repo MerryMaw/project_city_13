@@ -16,7 +16,8 @@ local BASECLASS = {
     volume = 1,
     maxVolume = 0,
 
-    isContainer = false;
+    isContainer = false,
+    parentContainer = nil,
 
     -- Gets all the items in the container
     getItems = function(self)
@@ -44,11 +45,17 @@ local BASECLASS = {
 
         local currentVolume = self:getVolume();
 
+        -- Only when adding items, should you consider the volume upstream.
+        if (self.parentContainer) then
+            currentVolume = currentVolume + self.parentContainer:getVolume();
+        end
+
         for id, item in pairs(items) do
             local itemVolume = item:getVolume();
 
             if (currentVolume + itemVolume < self.maxVolume) then
                 currentVolume = currentVolume + itemVolume;
+                item.parentContainer = self;
                 insert(self.items,item);
                 items[id] = nil;
             end
