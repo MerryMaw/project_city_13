@@ -52,8 +52,10 @@ local BASECLASS = {
 
         for id, item in pairs(items) do
             local itemVolume = item:getVolume();
+            local parentContainerLarger = (not self.parentContainer or self.parentContainer.maxVolume > item.maxVolume)
+            local currentContainerSupport = currentVolume + itemVolume < self.maxVolume;
 
-            if (currentVolume + itemVolume < self.maxVolume) then
+            if (parentContainerLarger and currentContainerSupport) then
                 currentVolume = currentVolume + itemVolume;
                 item.parentContainer = self;
                 insert(self.items,item);
