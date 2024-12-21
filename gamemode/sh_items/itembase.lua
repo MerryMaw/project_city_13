@@ -43,12 +43,15 @@ local BASECLASS = {
         if (not self.isContainer) then return items end
         self.items = self.items or {};
 
-        local currentVolume = self:getVolume();
+        local currentVolume;
+        local topContainer = self;
 
-        -- Only when adding items, should you consider the volume upstream.
-        if (self.parentContainer) then
-            currentVolume = currentVolume + self.parentContainer:getVolume();
+        -- Move to the top level of the bag-ception and fetch the combined volume of them all.
+        while (topContainer.parentContainer) do
+            topContainer = topContainer.parentContainer;
         end
+
+        currentVolume = topContainer:getVolume()
 
         for id, item in pairs(items) do
             local itemVolume = item:getVolume();
