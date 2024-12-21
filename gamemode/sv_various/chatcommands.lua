@@ -8,6 +8,7 @@ local concat = table.concat;
 local create = ents.Create;
 local isValid = IsValid;
 local explode = string.Explode;
+local len = string.len;
 
 ---The chat commands function
 local chatCommands = {}
@@ -43,4 +44,18 @@ addChatCommand("spawn",function(pl,str)
     e:Spawn()
     e:Activate()
     e:DropToFloor()
+end)
+
+addChatCommand("respawn",function(pl,str)
+    local targetPlayer;
+
+    if (str and len(str) > 0 and pl:IsAdmin()) then
+        targetPlayer = player.GetBySteamID64(str);
+    end
+
+    if (isValid(targetPlayer) and not targetPlayer:Alive()) then
+        targetPlayer:Spawn();
+    elseif (not pl:Alive()) then
+        pl:Spawn();
+    end
 end)

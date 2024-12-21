@@ -12,6 +12,7 @@ AddCSLuaFile("cl_hud/hud.lua");
 
 include( "shared.lua" )
 
+include( "sv_various/death.lua" )
 include( "sv_various/chatcommands.lua" )
 
 ---Initialize
@@ -48,8 +49,11 @@ function GM:PlayerSpawn(pl)
 	hook.Call( "PlayerSetModel" , self , pl )
 	self:PlayerLoadout(pl)
 
-    pl:SetupHands()
-	pl:CrosshairDisable()
+    --- This will become handy for handling dead player bodies for other roles.
+    --- pl:SetShouldServerRagdoll(true)
+
+    pl:SetupHands();
+	pl:CrosshairDisable();
 
     pl:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 end
@@ -60,14 +64,6 @@ end
 function GM:PlayerLoadout( pl )
     pl:Give("weapon_hands", true)
 	return true
-end
-
-
----PlayerDeathSound
----@param _ userdata
----@return boolean
-function GM:PlayerDeathSound(_)
-    return true
 end
 
 --Damnit Garry!
