@@ -23,7 +23,7 @@ function drawHealthbar()
     local pl = LocalPlayer();
     local strCondition, textColor = getPlayerConditions(pl);
 
-    setDrawColor(MAIN_HEALTH_BG_COLOR);
+    setDrawColor(MAIN_BG_COLOR);
     drawRect(barX - 10,barY - 10,240,40);
 
     setFont("HealthFont");

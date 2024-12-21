@@ -8,6 +8,7 @@
 local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
+    properties = {},
 
     --@Model
     getModel = function(self)
