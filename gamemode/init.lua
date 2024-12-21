@@ -16,6 +16,7 @@ include( "shared.lua" )
 
 include( "sv_various/death.lua" )
 include( "sv_various/chatcommands.lua" )
+include( "sv_various/appliedeffects.lua" );
 
 ---Initialize
 function GM:Initialize()
