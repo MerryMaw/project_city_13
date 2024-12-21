@@ -52,8 +52,8 @@ function GM:ScoreboardShow()
 
         playerList.Pane.VBar.Paint = function(_, _, _) end
         playerList.Pane.VBar.btnGrip.Paint = function(_, w, h)
-            surface.SetDrawColor(MAIN_SCOREBOARD_TEXT)
-            surface.DrawRect(2,2,w-4,h-4,MAIN_SCOREBOARD_TEXT)
+            setDrawColor(MAIN_SCOREBOARD_TEXT)
+            drawRect(2,2,w-4,h-4,MAIN_SCOREBOARD_TEXT)
         end
         playerList.Pane.VBar.btnDown.Paint 	= playerList.Pane.VBar.btnGrip.Paint
         playerList.Pane.VBar.btnUp.Paint 	= playerList.Pane.VBar.btnGrip.Paint

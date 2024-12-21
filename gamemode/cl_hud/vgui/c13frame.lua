@@ -17,7 +17,7 @@ local drawText = surface.DrawText;
 ---Init
 function PANEL:Init()
     self.Font 		= "c13_normal"
-    self.Text		= "Title"
+    self.Text		= ""
 
     self:SetPaintBackgroundEnabled( false )
     self:SetPaintBorderEnabled( false )
@@ -48,6 +48,8 @@ end
 ---@param _ number
 ---@return boolean
 function PANEL:PaintOver(_, _)
+    if (not self.Text or #self.Text <= 0) then return true end
+
     setTextColor(MAIN_TEXT_COLOR.r, MAIN_TEXT_COLOR.g, MAIN_TEXT_COLOR.b, MAIN_TEXT_COLOR.a);
     setTextPos(10,2);
     setFont("c13_normal");
@@ -57,4 +59,4 @@ function PANEL:PaintOver(_, _)
     return true
 end
 
-vgui.Register( "C13_Frame", PANEL );
+vgui.Register( "C13_Frame", PANEL, "EditablePanel" );

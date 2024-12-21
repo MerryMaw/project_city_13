@@ -10,6 +10,7 @@ AddCSLuaFile("cl_hud/vgui/c13frame.lua");
 AddCSLuaFile("cl_hud/hud_healthbar.lua");
 AddCSLuaFile("cl_hud/hud_scoreboard.lua");
 AddCSLuaFile("cl_hud/hud_shoulddraw.lua");
+AddCSLuaFile("cl_hud/hud_chatbox.lua");
 AddCSLuaFile("cl_hud/hud.lua");
 
 include( "shared.lua" )
