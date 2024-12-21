@@ -14,8 +14,8 @@ local len = string.len;
 local chatCommands = {}
 
 ---addChatCommand
----@param Str string
----@param FunctionCallback function
+---@param command string
+---@param funcCallback function
 function addChatCommand(command,funcCallback)
     chatCommands["/"..command:gsub(" ","_"):lower()] = funcCallback
 end
