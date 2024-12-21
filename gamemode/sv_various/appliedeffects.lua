@@ -37,7 +37,6 @@ local function tickEffect()
 
     for id, data in pairs(entityWithEffects) do
         local pickTime = timeNow;
-        data.LastTime = timeNow;
 
         -- This will cap delta to the EndTime of the effect, rather than overextend.
         if (data.EndTime <= timeNow) then
@@ -46,6 +45,7 @@ local function tickEffect()
 
         -- Calculate delta for effect multiplier
         local delta = pickTime - data.LastTime;
+        data.LastTime = pickTime;
 
         -- If there is a tick to run, then run it.
         if (data.Tick) then
