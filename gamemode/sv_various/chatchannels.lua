@@ -4,8 +4,11 @@
 --- DateTime: 12/22/24 2:57 PM
 ---
 
+local range = 250 * 250;
 
 hook.Add( "PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bTeam, plReceiver, plSpeaker)
     -- TODO: Need to filter out the channels the listener and speaker is talking in.
     print(text,bTeam,plReceiver,plSpeaker);
+
+    if (ply:GetPos():DistToSqr(target:GetPos()) < range) then return true end;
 end)
