@@ -11,6 +11,9 @@ local trim = string.Trim;
 local chatW, chatH = 500,300;
 local cx, cy = 50, sh- 500;
 
+local setDrawColor = surface.SetDrawColor;
+local drawRect = surface.DrawRect;
+
 chatBox = chatBox or {};
 
 local function openChatbox()
@@ -18,7 +21,12 @@ local function openChatbox()
         chatBox.frame = vgui.Create("C13_Frame")
         chatBox.frame:SetPos(cx,cy);
         chatBox.frame:SetSize(chatW, chatH)
-        chatBox.frame.Paint = function (_,_,_) end;
+        chatBox.frame.Paint = function (_,w,h)
+            if (not chatBox.visible) then return end
+
+            setDrawColor(MAIN_BG_COLOR.r , MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
+            drawRect(0,0,w,h);
+        end;
 
         chatBox.RichText = vgui.Create("RichText", chatBox.frame)
         chatBox.RichText:Dock(FILL);
@@ -32,6 +40,7 @@ local function openChatbox()
 
         chatBox.TextEntry = vgui.Create( "DTextEntry", chatBox.frame )
         chatBox.TextEntry:Dock( BOTTOM )
+        chatBox.TextEntry:SetFont( "c13_normal" )
         chatBox.TextEntry.OnEnter = function( s )
             chat.AddText( s:GetValue() )
         end
@@ -105,8 +114,11 @@ end
 function chatBox.openChatbox( bTeam)
     openChatbox(bTeam);
 
+    chatBox.visible = true;
+
     -- MakePopup calls the input functions so we don't need to call those
     chatBox.frame:MakePopup();
+    chatBox.TextEntry:SetVisible(true);
     chatBox.TextEntry:RequestFocus();
 
     hook.Run( "StartChat" )
@@ -115,8 +127,7 @@ function chatBox.openChatbox( bTeam)
 end
 
 function chatBox.closeChatbox()
-    -- Stuff
-
+    chatBox.visible = false;
     -- Give the player control again
     chatBox.frame:SetMouseInputEnabled( false )
     chatBox.frame:SetKeyboardInputEnabled( false )
@@ -127,6 +138,8 @@ function chatBox.closeChatbox()
 
     -- Clear the text entry
     chatBox.TextEntry:SetText( "" )
+    chatBox.TextEntry:SetVisible(false);
+
     hook.Run( "ChatTextChanged", "" )
 
     -- More stuff

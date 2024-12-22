@@ -24,14 +24,14 @@ function drawHealthbar()
     local strCondition, textColor = getPlayerConditions(pl);
 
     setDrawColor(MAIN_BG_COLOR);
-    drawRect(barX - 10,barY - 10,240,40);
+    drawRect(barX,barY - 10,240,40);
 
     setFont("HealthFont");
     setTextColor(MAIN_TEXT_COLOR);
-    setTextPos(barX,barY);
+    setTextPos(barX + 10,barY);
     drawText("Health condition: ");
 
-    setTextPos(barX+150,barY);
+    setTextPos(barX+160,barY);
     setTextColor(textColor);
     drawText(strCondition);
 end
