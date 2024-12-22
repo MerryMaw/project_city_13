@@ -9,6 +9,7 @@ local create = ents.Create;
 local isValid = IsValid;
 local explode = string.Explode;
 local len = string.len;
+local tostring = tostring;
 
 ---The chat commands function
 local chatCommands = {}
@@ -41,6 +42,20 @@ addChatCommand("spawn",function(pl,str)
     e:Spawn()
     e:Activate()
     e:DropToFloor()
+end)
+
+addChatCommand("spawnitem",function(pl,str)
+    if (not pl:IsAdmin()) then return end
+
+    local item = createItem(str);
+
+    if (not item) then pl:ChatPrint("Item does not exist!") return end;
+
+    local pos = pl:GetEyeTrace().HitPos + Vector(0,0,20);
+
+    pl:ChatPrint("Spawn item " .. item.Name .. " at " .. tostring(pos));
+
+    SpawnItem(pos,item,1);
 end)
 
 addChatCommand("respawn",function(pl,str)

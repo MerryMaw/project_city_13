@@ -10,12 +10,15 @@ ENT.PrintName		= "C13_BASE_POWER_SOURCE";
 ENT.Author			= "The Maw";
 ENT.Purpose			= "Provides base fundamentals for City 13 entities, which provides power";
 
+ENT.Model			= "models/props_vehicles/generatortrailer01.mdl"
+
 ENT.maxPowerGenerated  = 1;
 ENT.acceptedFuel    = {};
 
 ---SetupDataTables
 function ENT:SetupDataTables()
     BaseClass.SetupDataTables(self);
+
     self:NetworkVar("Int", 0, "PowerGenerated");
     self:NetworkVar("Int", 1, "PowerTarget");
 

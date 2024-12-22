@@ -6,6 +6,8 @@
 
 ---@type function
 local insert = table.insert;
+local isValid = IsValid;
+local create = ents.Create;
 
 ---@type userdata
 local itemsInGame = {};
@@ -16,7 +18,7 @@ local itemsInGame = {};
 function createItem(className,itemID)
     local itemClass = getItemClass(className);
 
-    if (not itemClass) then error( "Invalid ITEM class: " .. className .. "!" ) return end
+    if (not itemClass) then MsgN( "Invalid ITEM class: " .. className .. "!" ) return end
 
     local item = {
     _Region = SystemID,
@@ -44,4 +46,28 @@ end
 ---@param ID number
 function removeItemByID(ID)
     itemsInGame[ID] = nil;
+end
+
+if (SERVER) then
+
+    ---SpawnItem
+    ---@param pos userdata
+    ---@param item table
+    ---@param quantity number
+    ---@return userdata
+    function SpawnItem(pos, item, quantity)
+        local e = create("c13_base_item")
+
+        if (not isValid(e)) then return end
+
+        e.Model = item:getModel();
+
+        e:SetItem(item,quantity);
+        e:SetPos(pos);
+        e:Spawn();
+        e:Activate();
+        e:DropToFloor();
+
+        return e;
+    end
 end

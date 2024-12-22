@@ -7,7 +7,7 @@
 serverEquipment = serverEquipment or {};
 
 local type = type;
-
+local top = Vector(0,0,20);
 -- This should be universal for every object, not just players.
 local meta = FindMetaTable("Entity");
 
@@ -76,7 +76,9 @@ if SERVER then
         local slotId = equipment_translateName(item.Slot);
         if (not slotId) then return end;
 
-        -- TODO: Drop the item being unequipped or return it to player bag inventory.
+        -- Drops the item on the entity's position.
+        SpawnItem(self:GetPos() + top, item,1);
+
         serverEquipment[entId][slotId] = nil;
     end
 

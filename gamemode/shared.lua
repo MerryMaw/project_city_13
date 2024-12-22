@@ -1,7 +1,11 @@
 
 AddCSLuaFile("sh_items/itemloader.lua");
 
+AddCSLuaFile("sh_various/performance_cvar.lua");
+
 include("sh_items/itemloader.lua");
+
+include("sh_various/performance_cvar.lua");
 
 GM.Name 			= "Project City 13"
 GM.Author 			= "The Maw"

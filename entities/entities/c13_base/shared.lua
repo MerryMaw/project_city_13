@@ -10,7 +10,7 @@ ENT.PrintName		= "C13_BASE";
 ENT.Author			= "The Maw";
 ENT.Purpose			= "Provides base fundamentals for City 13 entities";
 
-ENT.Model			= "models/props_vehicles/generatortrailer01.mdl"
+ENT.Model			= "models/props_lab/box01a.mdl"
 
 --- Save an entire Network slot by reusing "SetHealth" and "SetMaxHealth".
 ENT.Durability      = 1;

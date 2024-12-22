@@ -10,7 +10,7 @@ AddCSLuaFile("itemmanager.lua")
 include("itembase.lua")
 include("itemmanager.lua")
 
-local Folder  		= GM.Folder:gsub("gamemodes/","").."/gamemode/sh_items/class";
+local Folder  		= GM.Folder:gsub("gamemodes/","").."/gamemode/sh_items/items";
 
 ---@type table
 local classes		= {};

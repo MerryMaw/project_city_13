@@ -34,14 +34,14 @@ local function openChatbox()
 
         function chatBox.RichText:PerformLayout()
 
-            if ( self:GetFont() ~= "ChatFont" ) then
-                self:SetFontInternal( "ChatFont" )
+            if ( self:GetFont() ~= "c13_chatfont_outlined" ) then
+                self:SetFontInternal( "c13_chatfont_outlined" )
             end
         end
 
         chatBox.TextEntry = vgui.Create( "DTextEntry", chatBox.frame )
         chatBox.TextEntry:Dock( BOTTOM )
-        chatBox.TextEntry:SetFont( "c13_normal" )
+        chatBox.TextEntry:SetFont( "c13_chatfont" )
         chatBox.TextEntry.OnEnter = function( s )
             chat.AddText( s:GetValue() )
         end
