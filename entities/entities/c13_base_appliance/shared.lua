@@ -22,6 +22,8 @@ function ENT:SetupDataTables()
     end
 end
 
+---GetPowerRequired
+---@return number
 function ENT:GetPowerRequired()
     return self.PowerRequired;
 end

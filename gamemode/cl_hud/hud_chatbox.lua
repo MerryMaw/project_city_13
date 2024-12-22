@@ -16,6 +16,7 @@ local drawRect = surface.DrawRect;
 
 chatBox = chatBox or {};
 
+---openChatbox
 local function openChatbox()
     if (not chatBox.frame) then
         chatBox.frame = vgui.Create("C13_Frame")
@@ -79,6 +80,12 @@ hook.Add( "PlayerBindPress", "c13_chatBinds", function(_, bind, _)
     return true;
 end )
 
+---ChatText
+---@param _ number
+---@param _ string
+---@param text string
+---@param type string
+---@return boolean
 function GM:ChatText(_, _, text, type )
     if type == "joinleave" or type == "none" then
         chatBox.RichText:AppendText( text .. "\n" )
@@ -89,6 +96,7 @@ end
 -- OVERRIDE THE OLD CHAT TEXT TO INJECT OUR OWN CODE. From Wiki Garrysmod <---
 local oldAddText = chat.AddText;
 
+---AddText
 function chat.AddText( ... )
     local args = {...} -- Create a table of varargs
 
@@ -111,10 +119,14 @@ function chat.AddText( ... )
     oldAddText( ... )
 end
 
+---openChatbox
+---@param bTeam boolean
 function chatBox.openChatbox( bTeam)
     openChatbox(bTeam);
 
     chatBox.visible = true;
+
+    chatBox.RichText:SetVerticalScrollbarEnabled(true);
 
     -- MakePopup calls the input functions so we don't need to call those
     chatBox.frame:MakePopup();
@@ -126,12 +138,15 @@ function chatBox.openChatbox( bTeam)
     -- More stuff
 end
 
+---closeChatbox
 function chatBox.closeChatbox()
     chatBox.visible = false;
     -- Give the player control again
     chatBox.frame:SetMouseInputEnabled( false )
     chatBox.frame:SetKeyboardInputEnabled( false )
     gui.EnableScreenClicker( false )
+
+    chatBox.RichText:SetVerticalScrollbarEnabled(false);
 
     -- We are done chatting
     hook.Run( "FinishChat" )

@@ -21,20 +21,29 @@ SWEP.Secondary.Ammo			= "none"
 
 SWEP.UseHands = true
 
+---Initialize
 function SWEP:Initialize()
 	self:SetHoldType( "normal" )
 	self:SetNoDraw(true)
 end
 
+---Think
 function SWEP:Think()
 end
 
+---PrimaryAttack
 function SWEP:PrimaryAttack()
 end
 
+---SecondaryAttack
 function SWEP:SecondaryAttack()
 end
 
+---PreDrawViewModel
+---@param _ userdata
+---@param _ userdata
+---@param _ userdata
+---@return boolean
 function SWEP:PreDrawViewModel(_, _, _)
 	--vm:SetMaterial( "engine/occlusionproxy" )
 	return true

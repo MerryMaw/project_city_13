@@ -30,9 +30,6 @@ hook.Add( "PlayerSay", "ChatCommandsC13", function( ply, text, _ )
     end
 end)
 
-
-
-
 addChatCommand("spawn",function(pl,str)
     if (not pl:IsAdmin()) then return end
 

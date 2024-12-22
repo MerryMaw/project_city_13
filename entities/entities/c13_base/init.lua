@@ -9,6 +9,7 @@ AddCSLuaFile( "shared.lua" )
 
 include( 'shared.lua' )
 
+---Initialize
 function ENT:Initialize()
     self:SetModel(self.Model)
     self:PhysicsInit( SOLID_VPHYSICS )
