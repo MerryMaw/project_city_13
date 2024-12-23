@@ -9,6 +9,26 @@ AddCSLuaFile( "shared.lua" )
 
 include( 'shared.lua' )
 
+function ENT:Use( activator )
+    local item = self:GetItem();
+
+    if (not item or not IsValid(activator)) then return end
+
+    local entId = activator:EntIndex();
+
+    local mainHand = getEquipmentSlot(entId,"Main Hand");
+    local offHand = getEquipmentSlot(entId,"Off Hand");
+
+    if (not mainHand) then
+        activator:EquipItem(item,"Main Hand")
+        self:Remove();
+    elseif (not offHand) then
+        activator:EquipItem(item,"Off Hand")
+        self:Remove();
+    else
+        --TODO: Add to inventory
+    end
+end
 
 ---SetItem
 ---@param itemData table

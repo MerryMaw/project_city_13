@@ -1,6 +1,7 @@
 
 AddCSLuaFile()
 
+local IsValid = IsValid;
 
 SWEP.PrintName			= "Hands"
 SWEP.Author				= "The Maw"
@@ -11,7 +12,7 @@ SWEP.WorldModel			= ""
 
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1
-SWEP.Primary.Automatic		= true
+SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "none"
 
 SWEP.Secondary.ClipSize		= -1
@@ -33,10 +34,24 @@ end
 
 ---PrimaryAttack
 function SWEP:PrimaryAttack()
+	if (not IsValid(self.Owner)) then return end
+
+	local item = getEquipmentSlot(self.Owner:EntIndex(),"Main Hand");
+
+	if (not item) then return end;
+
+	item:use(self.Owner);
 end
 
 ---SecondaryAttack
 function SWEP:SecondaryAttack()
+	if (not IsValid(self.Owner)) then return end
+
+	local item = getEquipmentSlot(self.Owner:EntIndex(),"Off Hand");
+
+	if (not item) then return end;
+
+	item:use(self.Owner);
 end
 
 ---PreDrawViewModel

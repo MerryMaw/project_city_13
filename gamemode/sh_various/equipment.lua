@@ -23,6 +23,13 @@ slotIDs[8] = "Legs";
 slotIDs[9] = "Main Hand";
 slotIDs[10] = "Off Hand";
 
+local slotNameToIDs = {}
+
+--- Reverse the IDs to a NameToID map for speedier performance.
+for k,v in pairs(slotIDs) do
+    slotNameToIDs[v:lower()] = k;
+end
+
 ---equipment_translateID
 ---@param id number
 ---@return string
@@ -35,11 +42,7 @@ end
 ---@return number
 function equipment_translateName(name)
     name = name:lower();
-    for k,v in pairs(slotIDs) do
-        if (v:lower() == name) then return k end
-    end
-
-    return nil;
+    return slotNameToIDs[name];
 end
 
 if SERVER then
@@ -51,9 +54,13 @@ if SERVER then
 
     ---EquipItem
     ---@param item table
-    function meta:EquipItem(item)
+    function meta:EquipItem(item,slot)
         local entId = self:EntIndex();
-        local slotId = equipment_translateName(item.Slot);
+
+        slot = slot and slot or item.Slot;
+        slot = slot and slot or "Main Hand";
+
+        local slotId = equipment_translateName(slot);
 
         if (not slotId) then return end;
 
@@ -69,11 +76,14 @@ if SERVER then
 
     ---UnequipItem
     ---@param item table
-    function meta:UnequipItem(item)
+    function meta:UnequipItem(item, slot)
         local entId = self:EntIndex();
         if (not serverEquipment[entId]) then return end;
 
-        local slotId = equipment_translateName(item.Slot);
+        slot = slot and slot or item.Slot;
+        slot = slot and slot or "Main Hand";
+
+        local slotId = equipment_translateName(slot);
         if (not slotId) then return end;
 
         -- Drops the item on the entity's position.
@@ -84,11 +94,31 @@ if SERVER then
 
 else
     net.Receive("EquipItem",function()
+        local entId = net.ReadUInt(32);
+        local slotId = net.ReadUInt(7);
+        local item = net.ReadTable(); -- SHOULD THE CLIENT REALLY KNOW ALL THIS?
 
+        serverEquipment[entId][slotId] = item;
     end)
 
     net.Receive("UnequipItem",function()
+        local entId = net.ReadUInt(32);
+        local slotId = net.ReadUInt(7);
 
+        serverEquipment[entId][slotId] = nil;
+    end)
+
+    net.Receive("TransmitEquipment",function()
+        local entId = net.ReadUInt(32);
+        local equipment = net.ReadTable(); -- SHOULD THE CLIENT REALLY KNOW ALL THIS?
+
+        serverEquipment[entId] = equipment;
+    end)
+
+    net.Receive("ClearEquipment",function()
+        local entId = net.ReadUInt(32);
+
+        serverEquipment[entId] = nil;
     end)
 end
 

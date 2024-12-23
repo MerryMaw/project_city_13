@@ -94,7 +94,7 @@ local BASECLASS = {
 
     init 		= function(_) end,
 
-    use         = function(_) end,
+    use         = function(_,_) end,
 }
 
 BASECLASS.__index = BASECLASS
