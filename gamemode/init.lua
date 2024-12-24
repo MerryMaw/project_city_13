@@ -15,6 +15,7 @@ AddCSLuaFile("cl_hud/hud.lua");
 
 include( "shared.lua" )
 
+include( "sv_various/config.lua" );
 include( "sv_various/death.lua" )
 include( "sv_various/chatchannels.lua" )
 include( "sv_various/chatcommands.lua" )
