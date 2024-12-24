@@ -4,6 +4,89 @@
 --- DateTime: 12/24/24 9:26 AM
 ---
 
+local DEFAULT_CONFIG = {
+    ["sqlDatabase"] = "c13",
+    ["sqlPass"] = "ChangeMe",
+    ["sqlUser"] = "ChangeMe",
+    ["init_roles"] = {
+        ["Administrator"] = {
+            ["loadout"] = {}
+        },
+        ["Bartender"] = {
+            ["loadout"] = {}
+        },
+        ["Botany"] = {
+            ["loadout"] = {}
+        },
+        ["Chef"] = {
+            ["loadout"] = {}
+        },
+        ["Chemist"] = {
+            ["loadout"] = {}
+        },
+        ["Chief Engineer"] = {
+            ["loadout"] = {}
+        },
+        ["Citizen"] = {
+            ["loadout"] = {}
+        },
+        ["Detective"] = {
+            ["loadout"] = {}
+        },
+        ["Engineer"] = {
+            ["loadout"] = {}
+        },
+        ["Geneticist"] = {
+            ["loadout"] = {}
+        },
+        ["Hunters"] = {
+            ["loadout"] = {}
+        },
+        ["Lawyer"] = {
+            ["loadout"] = {}
+        },
+        ["Mailman"] = {
+            ["loadout"] = {}
+        },
+        ["Manufacturer"] = {
+            ["loadout"] = {}
+        },
+        ["Medic"] = {
+            ["loadout"] = {}
+        },
+        ["Medical Director"] = {
+            ["loadout"] = {}
+        },
+        ["Overwatch"] = {
+            ["loadout"] = {}
+        },
+        ["Priest"] = {
+            ["loadout"] = {}
+        },
+        ["Quartermaster"] = {
+            ["loadout"] = {}
+        },
+        ["Research Director"] = {
+            ["loadout"] = {}
+        },
+        ["Researcher"] = {
+            ["loadout"] = {}
+        },
+        ["Roboticist"] = {
+            ["loadout"] = {}
+        },
+        ["Salvager"] = {
+            ["loadout"] = {}
+        },
+        ["Combine Soldier"] = {
+            ["loadout"] = {}
+        },
+        ["Combine Elite"] = {
+            ["loadout"] = {}
+        },
+    }
+};
+
 GAME_CONFIG = GAME_CONFIG or {};
 
 -- THE CONFIG DIRECTORY
@@ -12,31 +95,21 @@ local configDir = "c13";
 -- LOCATION OF CUSTOM CONFIG
 local configLocation = configDir .. "/config.json";
 
--- LOCATION OF DEFAULT CONFIG. DO NOT CHANGE THIS FOR COMPARTIBILITY'S SAKE
-local baseConfigLocation = configDir .. "/config_default.json";
-
 ---initializeConfig
 local function initializeConfig()
-    local modDefault = "data/"..baseConfigLocation;
-    local modConfig = "data/"..configLocation;
+    local modConfig = "data/" .. configLocation;
 
-    if (not file.Exists(modDefault,"GAME")) then error("Default configuration not found!") return end
-    if (not file.IsDir( configDir, "DATA" )) then file.CreateDir(configDir) end;
+    if (not file.IsDir(configDir, "DATA")) then file.CreateDir(configDir) end;
 
-    local json = "";
+    GAME_CONFIG = DEFAULT_CONFIG;
 
-    if (file.Exists(modConfig,"GAME")) then
+    if (file.Exists(modConfig, "GAME")) then
         print("Loading NORMAL configurations from file ", modConfig);
-        json = file.Read(modConfig,"GAME");
+        GAME_CONFIG = util.JSONToTable(file.Read(modConfig, "GAME"));
     else
-        print("Loading DEFAULT configurations from file ", modDefault);
-        json = file.Read(modDefault,"GAME");
-
-        print("Copied DEFAULT configurations to file ", modConfig);
-        file.Write(configLocation,json);
+        print("Creating new file with DEFAULT configurations at ", modConfig);
+        file.Write(configLocation, util.TableToJSON(DEFAULT_CONFIG, true));
     end
-
-    GAME_CONFIG = util.JSONToTable(json);
 end
 
 hook.Add("Initialize", "c13LoadConfig", initializeConfig);
