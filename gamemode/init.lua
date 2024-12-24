@@ -52,14 +52,26 @@ end
 ---PlayerSpawn
 ---@param pl userdata
 function GM:PlayerSpawn(pl)
+    if (not pl.allowSpawn) then
+        GAMEMODE:PlayerSpawnAsSpectator( pl )
+        pl:CrosshairDisable();
+        return
+    end;
+
+    pl.allowSpawn = nil;
+
+    pl:UnSpectate();
+
+    print("Player respawning");
+
 	hook.Call( "PlayerSetModel" , self , pl )
 	self:PlayerLoadout(pl)
 
     --- This will become handy for handling dead player bodies for other roles.
     --- pl:SetShouldServerRagdoll(true)
 
+    pl:CrosshairDisable();
     pl:SetupHands();
-	pl:CrosshairDisable();
 
     pl:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 end

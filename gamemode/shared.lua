@@ -26,5 +26,5 @@ GM.Version			= 0.01
 ---@param pl userdata
 ---@return boolean
 function GM:PlayerNoClip( pl )
-	return pl:IsAdmin();
+	return pl:IsAdmin() and pl:GetObserverMode() == OBS_MODE_NONE;
 end

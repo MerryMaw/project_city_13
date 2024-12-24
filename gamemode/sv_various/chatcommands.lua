@@ -12,7 +12,7 @@ local len = string.len;
 local tostring = tostring;
 
 ---The chat commands function
-local chatCommands = {}
+chatCommands = chatCommands or {}
 
 ---addChatCommand
 ---@param command string
@@ -59,14 +59,18 @@ addChatCommand("spawnitem",function(pl,str)
 end)
 
 addChatCommand("respawn",function(pl,str)
-    local targetPlayer;
+    local tPl;
 
     if (str and len(str) > 0 and pl:IsAdmin()) then
-        targetPlayer = player.GetBySteamID64(str);
+        tPl = player.GetBySteamID64(str);
     end
 
-    if (isValid(targetPlayer) and not targetPlayer:Alive()) then
-        targetPlayer:Spawn();
+    if (isValid(tPl) and (not tPl:Alive() or tPl:GetObserverMode() ~= OBS_MODE_NONE)) then
+        tPl.allowSpawn = true;
+        tPl:Spawn();
+    elseif (pl:GetObserverMode() ~= OBS_MODE_NONE and pl:IsAdmin()) then
+        pl.allowSpawn = true;
+        pl:Spawn();
     elseif (not pl:Alive()) then
         pl:Spawn();
     end
