@@ -1,5 +1,37 @@
 {
   "sqlDatabase" : "c13",
   "sqlUser" : "ChangeMe",
-  "sqlPass" : "ChangeMe"
+  "sqlPass" : "ChangeMe",
+
+  "init_roles" : {
+    "Administrator" : {},
+    "Security" : {},
+    "Detective" : {},
+    "Stalker" : {},
+    "Hunters" : {},
+    "Striders" : {},
+    "Overwatch" : {},
+    "Manhack" : {},
+    "Scanner" : {},
+    "Dog" : {},
+    "Botany" : {},
+    "Chef" : {},
+    "Bartender" : {},
+    "Medical Director" : {},
+    "Medic" : {},
+    "Chemist" : {},
+    "Geneticist" : {},
+    "Roboticist" : {},
+    "Research Director" : {},
+    "Researcher" : {},
+    "Chief Engineer" : {},
+    "Engineer" : {},
+    "Manufacturer" : {},
+    "Quartermaster" : {},
+    "Salvager" : {},
+    "Mailman" : {},
+    "Priest" : {},
+    "Lawyer" : {},
+    "Citizen" : {}
+  }
 }
