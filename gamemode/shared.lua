@@ -1,6 +1,7 @@
 
 AddCSLuaFile("sh_items/itemloader.lua");
 
+AddCSLuaFile("sh_various/table_ext.lua");
 AddCSLuaFile("sh_various/equipment.lua");
 AddCSLuaFile("sh_various/performance_cvar.lua");
 
@@ -8,6 +9,7 @@ AddCSLuaFile("sh_player/player_health_conditions.lua");
 
 include("sh_items/itemloader.lua");
 
+include("sh_various/table_ext.lua");
 include("sh_various/equipment.lua");
 include("sh_various/performance_cvar.lua");
 

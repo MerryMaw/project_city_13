@@ -10,14 +10,30 @@ local insert = table.insert;
 local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
+
+    -- Other misc properties. Also used as modifiers for chemical mixtures and crafted products.
     properties = {},
 
+    -- The weight of the item.
     weight = 1,
+
+    -- The volume of the item itself.
     volume = 1,
+
+    -- Max volume. Only used if isContainer = true.
     maxVolume = 0,
 
+    -- Used by equipable items. All items can be placed in "Main Hand" and "Off Hand"
+    slot = nil,
+
+    -- Tells the gamemode, this item is a container. Make sure to set CLASS.maxVolume.
     isContainer = false,
+
+    -- Dynamic, reserved when adding items to containers.
     parentContainer = nil,
+
+    -- Used by radios and headsets. Table of channels like [command] = "ChannelName"
+    channels = nil,
 
     -- Gets all the items in the container
     getItems = function(self)

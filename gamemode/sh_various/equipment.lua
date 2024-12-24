@@ -57,7 +57,7 @@ if SERVER then
     function meta:EquipItem(item,slot)
         local entId = self:EntIndex();
 
-        slot = slot and slot or item.Slot;
+        slot = slot and slot or item.slot;
         slot = slot and slot or "Main Hand";
 
         local slotId = equipment_translateName(slot);
@@ -76,18 +76,20 @@ if SERVER then
 
     ---UnequipItem
     ---@param item table
-    function meta:UnequipItem(item, slot)
+    function meta:UnequipItem(item, slot, bIgnoreDrop)
         local entId = self:EntIndex();
         if (not serverEquipment[entId]) then return end;
 
-        slot = slot and slot or item.Slot;
+        slot = slot and slot or item.slot;
         slot = slot and slot or "Main Hand";
 
         local slotId = equipment_translateName(slot);
         if (not slotId) then return end;
 
-        -- Drops the item on the entity's position.
-        SpawnItem(self:GetPos() + top, item,1);
+        if (not bIgnoreDrop) then
+            -- Drops the item on the entity's position.
+            SpawnItem(self:GetPos() + top, item,1);
+        end
 
         serverEquipment[entId][slotId] = nil;
     end
