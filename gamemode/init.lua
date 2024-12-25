@@ -6,7 +6,9 @@ AddCSLuaFile("cl_various/color.lua");
 AddCSLuaFile("cl_various/fonts.lua");
 
 AddCSLuaFile("cl_hud/vgui/c13frame.lua");
+AddCSLuaFile("cl_hud/vgui/c13jobpicker.lua");
 
+AddCSLuaFile("cl_hud/hud_job_picker.lua");
 AddCSLuaFile("cl_hud/hud_healthbar.lua");
 AddCSLuaFile("cl_hud/hud_scoreboard.lua");
 AddCSLuaFile("cl_hud/hud_shoulddraw.lua");

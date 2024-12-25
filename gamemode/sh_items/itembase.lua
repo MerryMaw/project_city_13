@@ -11,6 +11,9 @@ local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
 
+    -- Description of the item.
+    desc = "Default BASE ITEM description.",
+
     -- Other misc properties. Also used as modifiers for chemical mixtures and crafted products.
     properties = {},
 

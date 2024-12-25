@@ -6,6 +6,7 @@ AddCSLuaFile("sh_various/equipment.lua");
 AddCSLuaFile("sh_various/performance_cvar.lua");
 
 AddCSLuaFile("sh_player/player_health_conditions.lua");
+AddCSLuaFile("sh_player/player_job_picker.lua");
 
 include("sh_items/itemloader.lua");
 
@@ -14,6 +15,7 @@ include("sh_various/equipment.lua");
 include("sh_various/performance_cvar.lua");
 
 include("sh_player/player_health_conditions.lua");
+include("sh_player/player_job_picker.lua");
 
 GM.Name 			= "Project City 13"
 GM.Author 			= "The Maw"

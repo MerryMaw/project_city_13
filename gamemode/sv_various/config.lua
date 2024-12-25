@@ -10,79 +10,104 @@ local DEFAULT_CONFIG = {
     ["sqlUser"] = "ChangeMe",
     ["init_roles"] = {
         ["Administrator"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Bartender"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Botany"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Chef"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Chemist"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Chief Engineer"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Citizen"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Detective"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Engineer"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Geneticist"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Hunters"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Lawyer"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Mailman"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Manufacturer"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Medic"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Medical Director"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Overwatch"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Priest"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Quartermaster"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Research Director"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Researcher"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Roboticist"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Salvager"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Combine Soldier"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
         ["Combine Elite"] = {
-            ["loadout"] = {}
+            ["loadout"] = {},
+            ["description"] = "No job desc"
         },
     }
 };
