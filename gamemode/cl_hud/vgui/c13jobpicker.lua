@@ -62,6 +62,9 @@ function PANEL:PopulateJobsPanel()
     print("Reloading Jobs UI with ", count(jobs));
 end
 
+---PerformLayout
+---@param w number
+---@param _ number
 function PANEL:PerformLayout(w, _)
     self.scrollablePanel:SetWide(w/2);
 end

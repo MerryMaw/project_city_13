@@ -28,9 +28,9 @@ for _,v in pairs(Class) do
 
     CLASS.__index = CLASS;
 
-    classes[CLASS.Name] = copy(CLASS);
+    classes[CLASS.name] = copy(CLASS);
 
-    print("Loading ITEM " .. CLASS.Name);
+    print("Loading ITEM " .. CLASS.name);
 end
 
 ---getItemClass

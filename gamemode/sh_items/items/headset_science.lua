@@ -4,7 +4,7 @@
 --- DateTime: 12/24/24 12:55 PM
 ---
 
-CLASS.Name 				= "Headset Science";
+CLASS.name 				= "Headset Science";
 CLASS.Model             = "models/props_lab/clipboard.mdl";
 
 CLASS.slot              = "Headset";

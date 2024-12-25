@@ -22,12 +22,14 @@ function createItem(className,itemID)
 
     local item = {
     _Region = SystemID,
-    Name = ClassName,
+    name = className,
     }
 
     setmetatable( item, itemClass )
 
     itemID = itemID or insert(itemsInGame, item);
+
+    print("Created item ", className, itemID);
 
     itemsInGame[itemID] = item
     itemsInGame[itemID].ID = itemID;

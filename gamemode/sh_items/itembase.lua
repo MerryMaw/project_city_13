@@ -11,6 +11,9 @@ local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
 
+    -- Name of the item.
+    name = "Default BASE ITEM",
+
     -- Description of the item.
     desc = "Default BASE ITEM description.",
 

@@ -16,7 +16,7 @@ slotIDs[1] = "Head";
 slotIDs[2] = "Headset";
 slotIDs[3] = "Backpack";
 slotIDs[4] = "Shoulder";
-slotIDs[5] = "Hands";
+slotIDs[5] = "Gloves";
 slotIDs[6] = "Foot";
 slotIDs[7] = "Body";
 slotIDs[8] = "Legs";
@@ -55,6 +55,8 @@ if SERVER then
     ---EquipItem
     ---@param item table
     function meta:EquipItem(item,slot)
+        if (not item) then return end
+
         local entId = self:EntIndex();
 
         slot = slot and slot or item.slot;
@@ -72,6 +74,16 @@ if SERVER then
         end
 
         serverEquipment[entId][slotId] = item;
+
+        print("Equipped ", entId, slotId, " item ", item.name);
+
+        if (self:IsPlayer()) then
+            net.Start("EquipItem")
+            net.WriteUInt(entId,32);
+            net.WriteUInt(slotId,7);
+            net.WriteTable(item);
+            net.Send(self);
+        end
     end
 
     ---UnequipItem
@@ -92,35 +104,58 @@ if SERVER then
         end
 
         serverEquipment[entId][slotId] = nil;
+
+        print("Unequipped ", entId, slotId);
+
+        if (self:IsPlayer()) then
+            net.Start("UnequipItem")
+            net.WriteUInt(entId,32);
+            net.WriteUInt(slotId,7);
+            net.Send(self);
+        end
     end
 
 else
     net.Receive("EquipItem",function()
         local entId = net.ReadUInt(32);
         local slotId = net.ReadUInt(7);
-        local item = net.ReadTable(); -- SHOULD THE CLIENT REALLY KNOW ALL THIS?
+        local item = net.ReadTable(); -- Only provide itemClass and itemId
 
+        serverEquipment[entId] = serverEquipment[entId] or {};
         serverEquipment[entId][slotId] = item;
+
+        print("Equipped ", entId, slotId, " item ", item.name);
+
+        reloadEquipmentMenu(entId);
     end)
 
     net.Receive("UnequipItem",function()
         local entId = net.ReadUInt(32);
         local slotId = net.ReadUInt(7);
 
+        serverEquipment[entId] = serverEquipment[entId] or {};
         serverEquipment[entId][slotId] = nil;
+
+        print("Unequipped ", entId, slotId);
+
+        reloadEquipmentMenu(entId);
     end)
 
     net.Receive("TransmitEquipment",function()
         local entId = net.ReadUInt(32);
-        local equipment = net.ReadTable(); -- SHOULD THE CLIENT REALLY KNOW ALL THIS?
+        local equipment = net.ReadTable(); -- Only provide itemClass and itemId
 
         serverEquipment[entId] = equipment;
+
+        reloadEquipmentMenu(entId);
     end)
 
     net.Receive("ClearEquipment",function()
         local entId = net.ReadUInt(32);
 
         serverEquipment[entId] = nil;
+
+        reloadEquipmentMenu(entId);
     end)
 end
 
@@ -144,4 +179,10 @@ end
 ---@param entId number
 function clearEquipment(entId)
     serverEquipment[entId] = nil;
+end
+
+---getEquipmentSlots
+---@return table
+function getEquipmentSlots()
+    return slotIDs;
 end

@@ -36,7 +36,7 @@ function ENT:SetItem(itemData, quantity)
     self.Item = itemData;
 
     self:SetQuantity(quantity);
-    self:SetItemName(itemData and itemData.Name or "");
+    self:SetItemName(itemData and itemData.name or "");
 end
 
 ---GetItem

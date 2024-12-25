@@ -4,7 +4,7 @@
 --- DateTime: 12/21/24 4:52 PM
 ---
 
-CLASS.Name 				= "ID Card";
+CLASS.name 				= "ID Card";
 CLASS.Model             = "models/props_lab/clipboard.mdl";
 
 function CLASS:use(userEntity)

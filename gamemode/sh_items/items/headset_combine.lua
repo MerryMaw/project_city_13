@@ -4,7 +4,7 @@
 --- DateTime: 12/24/24 12:51 PM
 ---
 
-CLASS.Name 				= "Headset Combine";
+CLASS.name 				= "Headset Combine";
 CLASS.Model             = "models/props_lab/clipboard.mdl";
 
 CLASS.slot              = "Headset";

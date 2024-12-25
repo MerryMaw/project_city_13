@@ -53,7 +53,7 @@ addChatCommand("spawnitem",function(pl,str)
 
     local pos = pl:GetEyeTrace().HitPos + Vector(0,0,20);
 
-    pl:ChatPrint("Spawn item " .. item.Name .. " at " .. tostring(pos));
+    pl:ChatPrint("Spawn item " .. item.name .. " at " .. tostring(pos));
 
     SpawnItem(pos,item,1);
 end)

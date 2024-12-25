@@ -7,7 +7,9 @@ AddCSLuaFile("cl_various/fonts.lua");
 
 AddCSLuaFile("cl_hud/vgui/c13frame.lua");
 AddCSLuaFile("cl_hud/vgui/c13jobpicker.lua");
+AddCSLuaFile("cl_hud/vgui/c13equipment.lua");
 
+AddCSLuaFile("cl_hud/hud_equipment.lua");
 AddCSLuaFile("cl_hud/hud_job_picker.lua");
 AddCSLuaFile("cl_hud/hud_healthbar.lua");
 AddCSLuaFile("cl_hud/hud_scoreboard.lua");
@@ -47,7 +49,7 @@ end
 ---@return boolean,string
 function GM:CheckPassword(Mystery,IP,ServerPassword,Name)
     print(Mystery,IP,ServerPassword,Name);
-	--This new hook returns AllowJoin,BlockMessage
+    return false, "Closed!";
 end
 
 
