@@ -68,7 +68,7 @@ addChatCommand("respawn",function(pl,str)
     if (isValid(tPl) and (not tPl:Alive() or tPl:GetObserverMode() ~= OBS_MODE_NONE)) then
         tPl.allowSpawn = true;
         tPl:Spawn();
-    elseif (pl:IsAdmin() and (not tPl:Alive() or tPl:GetObserverMode() ~= OBS_MODE_NONE)) then
+    elseif (pl:IsAdmin() and (not pl:Alive() or pl:GetObserverMode() ~= OBS_MODE_NONE)) then
         pl.allowSpawn = true;
         pl:Spawn();
     elseif (not pl:Alive()) then
