@@ -9,7 +9,7 @@ local insert = table.insert;
 local isValid = IsValid;
 local create = ents.Create;
 
----@type userdata
+---@type table
 local itemsInGame = {};
 
 ---createItem
@@ -39,7 +39,7 @@ function createItem(className,itemID)
 end
 
 ---removeItem
----@param item userdata
+---@param item ITEM
 function removeItem(item)
     removeItemByID(item:getID());
 end
@@ -54,7 +54,7 @@ if (SERVER) then
 
     ---SpawnItem
     ---@param pos userdata
-    ---@param item table
+    ---@param item ITEM
     ---@param quantity number
     ---@return userdata
     function SpawnItem(pos, item, quantity)

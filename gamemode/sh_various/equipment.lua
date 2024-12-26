@@ -53,7 +53,8 @@ if SERVER then
     util.AddNetworkString("TransmitEquipment")
 
     ---EquipItem
-    ---@param item table
+    ---@param item ITEM
+    ---@param slot string
     function meta:EquipItem(item,slot)
         if (not item) then return end
 
@@ -87,7 +88,9 @@ if SERVER then
     end
 
     ---UnequipItem
-    ---@param item table
+    ---@param item ITEM
+    ---@param slot string
+    ---@param bIgnoreDrop boolean
     function meta:UnequipItem(item, slot, bIgnoreDrop)
         local entId = self:EntIndex();
         if (not serverEquipment[entId]) then return end;
@@ -169,7 +172,7 @@ end
 ---getEquipmentSlot
 ---@param entId number
 ---@param name string
----@return table
+---@return ITEM
 function getEquipmentSlot(entId,name)
     if (type(name) == "string") then name = equipment_translateName(name) end
     return getEquipment(entId)[name];

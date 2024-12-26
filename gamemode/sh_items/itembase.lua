@@ -6,7 +6,7 @@
 
 local insert = table.insert;
 
----@type table
+---@class ITEM
 local BASECLASS = {
     --@Variables
     icon = Material("vgui/avatar_default"),
@@ -123,7 +123,7 @@ BASECLASS.__index = BASECLASS
 
 
 ---getBaseClass
----@return table
+---@return ITEM
 function getBaseClass()
     return BASECLASS;
 end

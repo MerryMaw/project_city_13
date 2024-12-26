@@ -12,7 +12,7 @@ include("itemmanager.lua")
 
 local Folder  		= GM.Folder:gsub("gamemodes/","").."/gamemode/sh_items/items";
 
----@type table
+---@type ITEM
 local classes		= {};
 
 local Class   		= file.Find(Folder.."/*.lua","LUA");
@@ -35,7 +35,7 @@ end
 
 ---getItemClass
 ---@param itemClass string
----@return table
+---@return ITEM
 function getItemClass(itemClass)
     return classes[itemClass];
 end

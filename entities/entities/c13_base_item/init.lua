@@ -31,7 +31,8 @@ function ENT:Use( activator )
 end
 
 ---SetItem
----@param itemData table
+---@param itemData ITEM
+---@param quantity number
 function ENT:SetItem(itemData, quantity)
     self.Item = itemData;
 
@@ -40,7 +41,7 @@ function ENT:SetItem(itemData, quantity)
 end
 
 ---GetItem
----@return table
+---@return ITEM
 function ENT:GetItem()
     return self.Item;
 end
