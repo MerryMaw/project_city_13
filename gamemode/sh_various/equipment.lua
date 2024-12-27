@@ -52,6 +52,15 @@ if SERVER then
     util.AddNetworkString("ClearEquipment")
     util.AddNetworkString("TransmitEquipment")
 
+    function meta:TransmitEquipment()
+        local equipment = getEquipment(self:EntIndex());
+
+        net.Start("TransmitEquipment")
+        net.WriteUInt(entId,32);
+        net.WriteTable(equipment);
+        net.Send(self);
+    end
+
     ---EquipItem
     ---@param item ITEM
     ---@param slot string
