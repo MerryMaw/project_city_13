@@ -10,3 +10,5 @@ surface.CreateFont( "c13_normal", {size = 18, weight = 0, antialias = false, fon
 
 surface.CreateFont( "c13_chatfont", {size = 22, antialias = false, font = "Roboto-Regular"} )
 surface.CreateFont( "c13_chatfont_outlined", {size = 22, antialias = false, font = "Roboto-Regular", outline = true} )
+
+surface.CreateFont( "c13_scoreboard", {size = 32, weight = 0, antialias = false, font = "Roboto-Bold"} )
