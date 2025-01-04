@@ -55,7 +55,7 @@ if (SERVER) then
             if (item) then pl:EquipItem(item) end
         end
 
-        hasPlayerPreviousJob[pl:EntIndex()] = jobData;
+        playerJobsPickedID[pl:EntIndex()] = jobData;
     end
 
     ---hasPlayerPreviousJob
