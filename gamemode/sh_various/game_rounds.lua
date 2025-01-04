@@ -42,6 +42,8 @@ if (SERVER) then
                 pl.allowSpawn = true;
                 pl:Spawn();
             end
+
+            gameOn = true;
         end
     end);
 
