@@ -8,6 +8,7 @@ AddCSLuaFile("cl_various/fonts.lua");
 AddCSLuaFile("cl_hud/vgui/c13frame.lua");
 AddCSLuaFile("cl_hud/vgui/c13jobpicker.lua");
 AddCSLuaFile("cl_hud/vgui/c13equipment.lua");
+AddCSLuaFile("cl_hud/vgui/c13bag.lua");
 
 AddCSLuaFile("cl_hud/hud_equipment.lua");
 AddCSLuaFile("cl_hud/hud_job_picker.lua");

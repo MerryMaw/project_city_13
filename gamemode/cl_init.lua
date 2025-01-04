@@ -7,6 +7,7 @@ include("cl_various/fonts.lua");
 include( "cl_hud/vgui/c13frame.lua" );
 include( "cl_hud/vgui/c13jobpicker.lua" );
 include( "cl_hud/vgui/c13equipment.lua" );
+include( "cl_hud/vgui/c13bag.lua" );
 
 include( "cl_hud/hud_equipment.lua" );
 include( "cl_hud/hud_job_picker.lua" );
