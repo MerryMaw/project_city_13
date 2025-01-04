@@ -42,6 +42,9 @@ if (SERVER) then
         addPlayerLoadout(pl,jobData);
     end);
 
+    ---addPlayerLoadout
+    ---@param pl userdata
+    ---@param jobData table
     function addPlayerLoadout(pl, jobData)
         local loadout = jobData["loadout"];
 
@@ -51,6 +54,21 @@ if (SERVER) then
             local item = createItem(v);
             if (item) then pl:EquipItem(item) end
         end
+
+        hasPlayerPreviousJob[pl:EntIndex()] = jobData;
+    end
+
+    ---hasPlayerPreviousJob
+    ---@param pl userdata
+    ---@return table
+    function hasPlayerPreviousJob(pl)
+        return playerJobsPickedID[pl:EntIndex()];
+    end
+
+    ---resetPlayerPreviousJob
+    ---@param pl userdata
+    function resetPlayerPreviousJob(pl)
+        playerJobsPickedID[pl:EntIndex()] = nil
     end
 else
     net.Receive("TransmitListOfJobs", function()
@@ -60,6 +78,8 @@ else
         reloadJobPickerHUD();
     end )
 
+    ---requestSpawnAsJob
+    ---@param jobName string
     function requestSpawnAsJob(jobName)
         net.Start("RequestSpawnAsJob")
             net.WriteString(jobName);
@@ -71,17 +91,4 @@ end
 ---@return table
 function getAllPickableJobs()
     return c13JobsList or {};
-end
-
----hasPlayerPreviousJob
----@param pl userdata
----@return table
-function hasPlayerPreviousJob(pl)
-    return playerJobsPickedID[pl:EntIndex()];
-end
-
----resetPlayerPreviousJob
----@param pl userdata
-function resetPlayerPreviousJob(pl)
-    playerJobsPickedID[pl:EntIndex()] = nil
 end
