@@ -6,64 +6,20 @@
 ---
 local sh = ScrH();
 
-local trim = string.Trim;
-
 local chatW, chatH = 500, 300;
 local cx, cy = 50, sh - 500;
 
-local setDrawColor = surface.SetDrawColor;
-local drawRect = surface.DrawRect;
-
-chatBox = chatBox or {};
+chatBox = chatBox or nil;
 
 ---openChatbox
 local function openChatbox()
-    if (not chatBox.frame) then
-        chatBox.frame = vgui.Create("C13_Frame")
-        chatBox.frame:SetPos(cx, cy);
-        chatBox.frame:SetSize(chatW, chatH)
-        chatBox.frame.Paint = function(_, w, h)
-            if (not chatBox.visible) then
-                return
-            end
-
-            setDrawColor(MAIN_BG_COLOR.r, MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
-            drawRect(0, 0, w, h);
-        end;
-
-        chatBox.RichText = vgui.Create("RichText", chatBox.frame)
-        chatBox.RichText:Dock(FILL);
-
-        function chatBox.RichText:PerformLayout()
-
-            if (self:GetFont() ~= "c13_chatfont_outlined") then
-                self:SetFontInternal("c13_chatfont_outlined")
-            end
-        end
-
-        chatBox.TextEntry = vgui.Create("DTextEntry", chatBox.frame)
-        chatBox.TextEntry:Dock(BOTTOM)
-        chatBox.TextEntry:SetFont("c13_chatfont")
-        chatBox.TextEntry.OnEnter = function(s)
-            chat.AddText(s:GetValue())
-        end
-
-        -- From Wiki Garrysmod
-        chatBox.TextEntry.OnKeyCodeTyped = function(self, code)
-            if code == KEY_ESCAPE then
-                -- Work around to hide the chatbox when the client presses escape
-                chatBox.closeChatbox()
-                gui.HideGameUI()
-            elseif code == KEY_ENTER then
-                -- Replicate the client pressing enter
-                if trim(self:GetText()) ~= "" then
-                    LocalPlayer():ConCommand("say " .. self:GetText())
-                end
-
-                chatBox.closeChatbox()
-            end
-        end
+    if (not chatBox) then
+        chatBox = vgui.Create("C13_Chatbox")
+        chatBox:SetPos(cx, cy);
+        chatBox:SetSize(chatW, chatH)
     end
+
+    chatBox:open();
 end
 
 hook.Add("PlayerBindPress", "c13_chatBinds", function(_, bind, _)
@@ -77,7 +33,7 @@ hook.Add("PlayerBindPress", "c13_chatBinds", function(_, bind, _)
         return
     end
 
-    chatBox.openChatbox(bTeam)
+    openChatbox();
 
     return true;
 end)
@@ -123,43 +79,3 @@ function chat.AddText(...)
     oldAddText(...)
 end
 
----openChatbox
----@param bTeam boolean
-function chatBox.openChatbox(bTeam)
-    openChatbox(bTeam);
-
-    chatBox.visible = true;
-
-    chatBox.RichText:SetVerticalScrollbarEnabled(true);
-
-    -- MakePopup calls the input functions so we don't need to call those
-    chatBox.frame:MakePopup();
-    chatBox.TextEntry:SetVisible(true);
-    chatBox.TextEntry:RequestFocus();
-
-    hook.Run("StartChat")
-
-    -- More stuff
-end
-
----closeChatbox
-function chatBox.closeChatbox()
-    chatBox.visible = false;
-    -- Give the player control again
-    chatBox.frame:SetMouseInputEnabled(false)
-    chatBox.frame:SetKeyboardInputEnabled(false)
-    gui.EnableScreenClicker(false)
-
-    chatBox.RichText:SetVerticalScrollbarEnabled(false);
-
-    -- We are done chatting
-    hook.Run("FinishChat")
-
-    -- Clear the text entry
-    chatBox.TextEntry:SetText("")
-    chatBox.TextEntry:SetVisible(false);
-
-    hook.Run("ChatTextChanged", "")
-
-    -- More stuff
-end

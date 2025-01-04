@@ -26,6 +26,7 @@ hook.Add("PlayerSay", "ChatCommandsC13", function(ply, text, _)
     local command = args[1]:lower();
 
     if (chatCommands[command]) then
+        print("Player", ply:Nick(), ply:SteamID64(), "Ran chat command", text);
         chatCommands[command](ply, concat(args, " ", 2))
         return false;
     end
@@ -58,7 +59,7 @@ addChatCommand("spawnitem", function(pl, str)
     if (not item) then
         pl:ChatPrint("Item does not exist!")
         return
-    end ;
+    end
 
     local pos = pl:GetEyeTrace().HitPos + Vector(0, 0, 20);
 

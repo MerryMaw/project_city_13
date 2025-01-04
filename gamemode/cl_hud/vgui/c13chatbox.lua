@@ -6,10 +6,102 @@
 
 local PANEL = {}
 
+local trim = string.Trim;
+
+local setDrawColor = surface.SetDrawColor;
+local drawRect = surface.DrawRect;
+
 ---Init
 function PANEL:Init()
+    self.isOpen = false;
+
     self:SetPaintBackgroundEnabled(false)
     self:SetPaintBorderEnabled(false)
+
+    self.RichText = vgui.Create("RichText", self)
+    self.RichText:Dock(FILL);
+
+    function self.RichText:PerformLayout()
+        if (self:GetFont() ~= "c13_chatfont_outlined") then
+            self:SetFontInternal("c13_chatfont_outlined")
+        end
+    end
+
+    self.TextEntry = vgui.Create("DTextEntry", self)
+    self.TextEntry:Dock(BOTTOM)
+    self.TextEntry:SetFont("c13_chatfont")
+    self.TextEntry.OnEnter = function(s)
+        chat.AddText(s:GetValue())
+    end
+
+    -- From Wiki Garrysmod
+    self.TextEntry.OnKeyCodeTyped = function(self2, code)
+        if code == KEY_ESCAPE then
+            -- Work around to hide the self when the client presses escape
+            self:close();
+            gui.HideGameUI()
+        elseif code == KEY_ENTER then
+            -- Replicate the client pressing enter
+            if trim(self2:GetText()) ~= "" then
+                LocalPlayer():ConCommand("say " .. self2:GetText())
+            end
+
+            self:close();
+        end
+    end
 end
 
-vgui.Register("C13_Chatbox", PANEL, "DPanel");
+---open
+function PANEL:open()
+    self.isOpen = true;
+
+    self.RichText:SetVerticalScrollbarEnabled(true);
+
+    -- MakePopup calls the input functions so we don't need to call those
+    self:MakePopup();
+    self.TextEntry:SetVisible(true);
+    self.TextEntry:RequestFocus();
+
+    hook.Run("StartChat")
+end
+
+---close
+function PANEL:close()
+    self.isOpen = false;
+    -- Give the player control again
+    self:SetMouseInputEnabled(false)
+    self:SetKeyboardInputEnabled(false)
+
+    gui.EnableScreenClicker(false)
+
+    self.RichText:SetVerticalScrollbarEnabled(false);
+
+    -- We are done chatting
+    hook.Run("FinishChat")
+
+    -- Clear the text entry
+    self.TextEntry:SetText("")
+    self.TextEntry:SetVisible(false);
+
+    hook.Run("ChatTextChanged", "")
+end
+
+---getOpen
+---@return boolean
+function PANEL:getOpen()
+    return self.isOpen;
+end
+
+---Paint
+---@param w number
+---@param h number
+function PANEL:Paint(w, h)
+    if (not self:getOpen()) then
+        return
+    end
+
+    setDrawColor(MAIN_BG_COLOR.r, MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
+    drawRect(0, 0, w, h);
+end
+
+vgui.Register("C13_Chatbox", PANEL, "EditablePanel");
