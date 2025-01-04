@@ -4,11 +4,15 @@
 --- DateTime: 12/21/24 6:17 PM
 ---
 
-local insert = table.insert;
-local CurTime = CurTime;
+entityWithEffects = entityWithEffects or {};
 
-local entityWithEffects = {};
+local insert = table.insert;
+local yield = coroutine.yield;
+local resume = coroutine.resume;
+local CurTime = CurTime;
+local routine;
 local lastRun;
+local tickDelay = 0.01;
 
 ---applyEffect
 ---@param entity userdata
@@ -30,37 +34,49 @@ end
 
 ---tickEffect
 local function tickEffect()
-    local timeNow = CurTime();
+    while (true) do
+        if (not next(entityWithEffects)) then
+            yield();
+        else
+            for id, data in pairs(entityWithEffects) do
+                yield();
 
-    if (lastRun and lastRun > timeNow) then
-        return
-    end
+                local pickTime = CurTime();
 
-    -- Don't run more than twice in 1 second. Performance reasons.
-    lastRun = timeNow + 1;
+                -- This will cap delta to the EndTime of the effect, rather than overextend.
+                if (data.EndTime <= pickTime) then
+                    pickTime = data.EntTime;
+                end
 
-    for id, data in pairs(entityWithEffects) do
-        local pickTime = timeNow;
+                -- Calculate delta for effect multiplier
+                local delta = pickTime - data.LastTime;
+                data.LastTime = pickTime;
 
-        -- This will cap delta to the EndTime of the effect, rather than overextend.
-        if (data.EndTime <= timeNow) then
-            pickTime = data.EntTime;
-        end
 
-        -- Calculate delta for effect multiplier
-        local delta = pickTime - data.LastTime;
-        data.LastTime = pickTime;
+                -- If there is a tick to run, then run it.
+                if (data.Tick) then
+                    data.Tick(delta, data);
+                end
 
-        -- If there is a tick to run, then run it.
-        if (data.Tick) then
-            data.Tick(delta, data);
-        end
-
-        -- If the effect has expired, remove it from the watchlist.
-        if (data.EndTime <= timeNow) then
-            entityWithEffects[id] = nil;
+                -- If the effect has expired, remove it from the watchlist.
+                if (data.EndTime <= pickTime) then
+                    entityWithEffects[id] = nil;
+                end
+            end
         end
     end
 end
 
-hook.Add("Tick", "effectTicks", tickEffect);
+hook.Add("Tick", "effectTicks", function()
+    local now = CurTime();
+    if (lastRun and lastRun > now) then
+        return
+    end
+
+    lastRun = now + tickDelay;
+
+    if (not routine or not resume(routine)) then
+        routine = coroutine.create(tickEffect);
+        resume(routine);
+    end
+end)
