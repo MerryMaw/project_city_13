@@ -1,4 +1,3 @@
-
 local hide = {
     ["CHudHealth"] = true,
     ["CHudBattery"] = true,
@@ -13,5 +12,7 @@ local hide = {
 }
 
 hook.Add("HUDShouldDraw", "HideDefaults", function(name)
-	if (hide[name]) then return false end
+    if (hide[name]) then
+        return false
+    end
 end)

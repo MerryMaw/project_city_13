@@ -16,7 +16,7 @@ local defaultStartTime = 120;
 if (SERVER) then
     util.AddNetworkString("RoundStart")
 
-    hook.Add("PlayerInitialSpawn","c13_updateRoundTimer",function(pl)
+    hook.Add("PlayerInitialSpawn", "c13_updateRoundTimer", function(pl)
         updateRoundTimer(pl);
     end)
 
@@ -30,15 +30,20 @@ if (SERVER) then
         updateRoundTimer();
     end
 
-    hook.Add("Tick","c13_gameCounter",function()
-        if (gameOn) then return end;
+    hook.Add("Tick", "c13_gameCounter", function()
+        if (gameOn) then
+            return
+        end ;
 
         local now = CurTime();
 
-        if (not roundCountDown) then restartRound(); return end;
+        if (not roundCountDown) then
+            restartRound();
+            return
+        end ;
 
         if (roundCountDown < now) then
-            for _,pl in pairs(player.GetAll()) do
+            for _, pl in pairs(player.GetAll()) do
                 pl.allowSpawn = true;
                 pl:Spawn();
             end
@@ -51,10 +56,12 @@ if (SERVER) then
     ---@param pl userdata
     function updateRoundTimer(pl)
         local now = CurTime();
-        if (not roundCountDown or roundCountDown < now) then return end
+        if (not roundCountDown or roundCountDown < now) then
+            return
+        end
 
         net.Start("RoundStart");
-        net.WriteUInt(floor(roundCountDown - now ),8);
+        net.WriteUInt(floor(roundCountDown - now), 8);
 
         if (IsValid(pl)) then
             net.Send(pl);
@@ -63,8 +70,8 @@ if (SERVER) then
         end
     end
 else
-    net.Receive("RoundStart",function()
-        roundCountDown = CurTime()+net.ReadUInt(8);
+    net.Receive("RoundStart", function()
+        roundCountDown = CurTime() + net.ReadUInt(8);
     end)
 end
 

@@ -4,13 +4,13 @@
 --- DateTime: 12/20/24 10:17 PM
 ---
 
-DEFINE_BASECLASS( "c13_base" );
+DEFINE_BASECLASS("c13_base");
 
-ENT.PrintName		= "C13_BASE_APPLIANCE";
-ENT.Author			= "The Maw";
-ENT.Purpose			= "Provides base fundamentals for City 13 powered entities";
+ENT.PrintName = "C13_BASE_APPLIANCE";
+ENT.Author = "The Maw";
+ENT.Purpose = "Provides base fundamentals for City 13 powered entities";
 
-ENT.PowerRequired   = 1;
+ENT.PowerRequired = 1;
 
 ---SetupDataTables
 function ENT:SetupDataTables()

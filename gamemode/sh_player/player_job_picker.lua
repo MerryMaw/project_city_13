@@ -13,7 +13,7 @@ if (SERVER) then
     util.AddNetworkString("TransmitListOfJobs")
     util.AddNetworkString("RequestSpawnAsJob")
 
-    hook.Add("Initialize","c13_loadInitJobs",function()
+    hook.Add("Initialize", "c13_loadInitJobs", function()
         c13JobsList = getConfigSetting("init_roles");
         print("Initialized ", count(c13JobsList), " Jobs");
     end)
@@ -22,24 +22,33 @@ if (SERVER) then
         print("Transmitted jobs table to ", pl:Nick(), pl:SteamID64());
 
         net.Start("TransmitListOfJobs")
-            net.WriteTable(c13JobsList);
+        net.WriteTable(c13JobsList);
         net.Send(pl);
     end)
 
     net.Receive("RequestSpawnAsJob", function(_, pl)
         local job = net.ReadString();
 
-        if (not job) then print("Player ", pl:Nick(), pl:SteamID64(), " selected empty job!") return end
-        if (hasPlayerPreviousJob(pl)) then print("Player ", pl:Nick(), pl:SteamID64(), " already had a previous job!") return end
+        if (not job) then
+            print("Player ", pl:Nick(), pl:SteamID64(), " selected empty job!")
+            return
+        end
+        if (hasPlayerPreviousJob(pl)) then
+            print("Player ", pl:Nick(), pl:SteamID64(), " already had a previous job!")
+            return
+        end
 
         local jobData = getAllPickableJobs()[job];
 
-        if (not jobData) then error("Player could not find selected job ", job); return end
+        if (not jobData) then
+            error("Player could not find selected job ", job);
+            return
+        end
 
         pl.allowSpawn = true;
         pl:Spawn();
 
-        addPlayerLoadout(pl,jobData);
+        addPlayerLoadout(pl, jobData);
     end);
 
     ---addPlayerLoadout
@@ -48,11 +57,15 @@ if (SERVER) then
     function addPlayerLoadout(pl, jobData)
         local loadout = jobData["loadout"];
 
-        if (not loadout) then return end;
+        if (not loadout) then
+            return
+        end ;
 
-        for _,v in pairs(loadout) do
+        for _, v in pairs(loadout) do
             local item = createItem(v);
-            if (item) then pl:EquipItem(item) end
+            if (item) then
+                pl:EquipItem(item)
+            end
         end
 
         playerJobsPickedID[pl:EntIndex()] = jobData;
@@ -76,13 +89,13 @@ else
         print("Initialized ", count(c13JobsList), " Jobs");
 
         reloadJobPickerHUD();
-    end )
+    end)
 
     ---requestSpawnAsJob
     ---@param jobName string
     function requestSpawnAsJob(jobName)
         net.Start("RequestSpawnAsJob")
-            net.WriteString(jobName);
+        net.WriteString(jobName);
         net.SendToServer();
     end
 end

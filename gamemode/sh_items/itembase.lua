@@ -43,13 +43,17 @@ local BASECLASS = {
 
     -- Gets all the items in the container
     getItems = function(self)
-        if (not self.items or not self.isContainer) then return {} end
+        if (not self.items or not self.isContainer) then
+            return {}
+        end
         return self.items;
     end,
 
     -- Gets the current total volume of the item and the items it contains, if any.
     getVolume = function(self)
-        if (not self.items or not self.isContainer) then return self.volume end
+        if (not self.items or not self.isContainer) then
+            return self.volume
+        end
 
         local currentVolume = self.volume;
 
@@ -62,7 +66,9 @@ local BASECLASS = {
 
     -- Adds items to the container and returns the leftover items, if any.
     addItems = function(self, items)
-        if (not self.isContainer) then return items end
+        if (not self.isContainer) then
+            return items
+        end
         self.items = self.items or {};
 
         local currentVolume;
@@ -83,7 +89,7 @@ local BASECLASS = {
             if (parentContainerLarger and currentContainerSupport) then
                 currentVolume = currentVolume + itemVolume;
                 item.parentContainer = self;
-                insert(self.items,item);
+                insert(self.items, item);
                 items[id] = nil;
             end
         end
@@ -96,7 +102,7 @@ local BASECLASS = {
         return self.Model or "models/error.mdl"
     end,
 
-    setModel = function(self,model)
+    setModel = function(self, model)
         self.Model = model
     end,
 
@@ -114,13 +120,14 @@ local BASECLASS = {
         return self.Icon
     end,
 
-    init 		= function(_) end,
+    init = function(_)
+    end,
 
-    use         = function(_,_) end,
+    use = function(_, _)
+    end,
 }
 
 BASECLASS.__index = BASECLASS
-
 
 ---getBaseClass
 ---@return ITEM

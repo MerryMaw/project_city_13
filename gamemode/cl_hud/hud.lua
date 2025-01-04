@@ -1,5 +1,3 @@
-
-
 ---HUDPaint
 function GM:HUDPaint()
     drawHealthbar();

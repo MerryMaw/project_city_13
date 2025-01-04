@@ -14,30 +14,30 @@ local count = table.Count;
 
 ---Init
 function PANEL:Init()
-    self.Font 		= "c13_normal"
-    self.Text		= "Jobs"
+    self.Font = "c13_normal"
+    self.Text = "Jobs"
 
-    self:SetPaintBackgroundEnabled( false )
-    self:SetPaintBorderEnabled( false )
+    self:SetPaintBackgroundEnabled(false)
+    self:SetPaintBorderEnabled(false)
 
-    self.titleLabel = vgui.Create("DLabel",self);
+    self.titleLabel = vgui.Create("DLabel", self);
     self.titleLabel:Dock(TOP);
     self.titleLabel:SetText(self.Text);
     self.titleLabel:SetFont(self.Font);
 
     self.dcButton = vgui.Create("DButton", self);
     self.dcButton:SetText("Disconnect");
-    self.dcButton:Dock( BOTTOM );
+    self.dcButton:Dock(BOTTOM);
     self.dcButton.DoClick = function(_)
         LocalPlayer():ConCommand("disconnect");
     end
 
-    self.scrollablePanel = vgui.Create("DScrollPanel",self);
-    self.scrollablePanel:Dock( LEFT );
+    self.scrollablePanel = vgui.Create("DScrollPanel", self);
+    self.scrollablePanel:Dock(LEFT);
 
-    self.pane = vgui.Create("DPanel",self);
-    self.pane:Dock( FILL );
-    self.pane.Paint = function (_,_,_)
+    self.pane = vgui.Create("DPanel", self);
+    self.pane:Dock(FILL);
+    self.pane.Paint = function(_, _, _)
 
     end
 
@@ -50,12 +50,12 @@ function PANEL:PopulateJobsPanel()
 
     local jobs = getAllPickableJobs();
 
-    for job,data in pairs(jobs) do
+    for job, data in pairs(jobs) do
         local clickableButton = self.scrollablePanel:Add("DButton");
         clickableButton:SetText(job);
-        clickableButton:Dock( TOP );
+        clickableButton:Dock(TOP);
         clickableButton.DoClick = function(_)
-            self:DisplayJobDetails(job,data);
+            self:DisplayJobDetails(job, data);
         end
     end
 
@@ -66,15 +66,15 @@ end
 ---@param w number
 ---@param _ number
 function PANEL:PerformLayout(w, _)
-    self.scrollablePanel:SetWide(w/2);
+    self.scrollablePanel:SetWide(w / 2);
 end
 
 ---Paint
 ---@param w number
 ---@param h number
-function PANEL:Paint(w,h)
+function PANEL:Paint(w, h)
     setDrawColor(MAIN_BG_COLOR.r, MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
-    drawRect(0,0,w,h);
+    drawRect(0, 0, w, h);
 end
 
 ---DisplayJobDetails
@@ -83,13 +83,13 @@ end
 function PANEL:DisplayJobDetails(jobName, jobData)
     self.pane:Clear();
 
-    local title = vgui.Create("DLabel",self.pane);
+    local title = vgui.Create("DLabel", self.pane);
     title:SetText(jobName);
     title:SetFont("c13_normal");
     title:Dock(TOP);
 
     if (jobData.description) then
-        local desc = vgui.Create("DLabel",self.pane);
+        local desc = vgui.Create("DLabel", self.pane);
         desc:SetText(jobData.description);
         desc:SetFont("c13_normal");
         desc:Dock(TOP);
@@ -97,11 +97,11 @@ function PANEL:DisplayJobDetails(jobName, jobData)
 
     local selectJob = vgui.Create("DButton", self.pane);
     selectJob:SetText("Join as " .. jobName);
-    selectJob:Dock( BOTTOM );
+    selectJob:Dock(BOTTOM);
     selectJob.DoClick = function(_)
         requestSpawnAsJob(jobName);
         self:SetVisible(false);
     end
 end
 
-vgui.Register( "C13_JobPicker", PANEL, "EditablePanel" );
+vgui.Register("C13_JobPicker", PANEL, "EditablePanel");

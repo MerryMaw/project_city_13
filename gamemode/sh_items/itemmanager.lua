@@ -15,17 +15,20 @@ local itemsInGame = {};
 ---createItem
 ---@param className string
 ---@param itemID number
-function createItem(className,itemID)
+function createItem(className, itemID)
     local itemClass = getItemClass(className);
 
-    if (not itemClass) then MsgN( "Invalid ITEM class: " .. className .. "!" ) return end
+    if (not itemClass) then
+        MsgN("Invalid ITEM class: " .. className .. "!")
+        return
+    end
 
     local item = {
-    _Region = SystemID,
-    name = className,
+        _Region = SystemID,
+        name = className,
     }
 
-    setmetatable( item, itemClass )
+    setmetatable(item, itemClass)
 
     itemID = itemID or insert(itemsInGame, item);
 
@@ -60,11 +63,13 @@ if (SERVER) then
     function SpawnItem(pos, item, quantity)
         local e = create("c13_base_item")
 
-        if (not isValid(e)) then return end
+        if (not isValid(e)) then
+            return
+        end
 
         e.Model = item:getModel();
 
-        e:SetItem(item,quantity);
+        e:SetItem(item, quantity);
         e:SetPos(pos);
         e:Spawn();
         e:Activate();

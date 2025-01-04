@@ -7,7 +7,7 @@
 serverEquipment = serverEquipment or {};
 
 local type = type;
-local top = Vector(0,0,20);
+local top = Vector(0, 0, 20);
 -- This should be universal for every object, not just players.
 local meta = FindMetaTable("Entity");
 
@@ -26,7 +26,7 @@ slotIDs[10] = "Off Hand";
 local slotNameToIDs = {}
 
 --- Reverse the IDs to a NameToID map for speedier performance.
-for k,v in pairs(slotIDs) do
+for k, v in pairs(slotIDs) do
     slotNameToIDs[v:lower()] = k;
 end
 
@@ -56,7 +56,7 @@ if SERVER then
         local equipment = getEquipment(self:EntIndex());
 
         net.Start("TransmitEquipment")
-        net.WriteUInt(entId,32);
+        net.WriteUInt(entId, 32);
         net.WriteTable(equipment);
         net.Send(self);
     end
@@ -64,8 +64,10 @@ if SERVER then
     ---EquipItem
     ---@param item ITEM
     ---@param slot string
-    function meta:EquipItem(item,slot)
-        if (not item) then return end
+    function meta:EquipItem(item, slot)
+        if (not item) then
+            return
+        end
 
         local entId = self:EntIndex();
 
@@ -74,7 +76,9 @@ if SERVER then
 
         local slotId = equipment_translateName(slot);
 
-        if (not slotId) then return end;
+        if (not slotId) then
+            return
+        end ;
 
         serverEquipment[entId] = serverEquipment[entId] or {};
 
@@ -89,8 +93,8 @@ if SERVER then
 
         if (self:IsPlayer()) then
             net.Start("EquipItem")
-            net.WriteUInt(entId,32);
-            net.WriteUInt(slotId,7);
+            net.WriteUInt(entId, 32);
+            net.WriteUInt(slotId, 7);
             net.WriteTable(item);
             net.Send(self);
         end
@@ -102,17 +106,21 @@ if SERVER then
     ---@param bIgnoreDrop boolean
     function meta:UnequipItem(item, slot, bIgnoreDrop)
         local entId = self:EntIndex();
-        if (not serverEquipment[entId]) then return end;
+        if (not serverEquipment[entId]) then
+            return
+        end ;
 
         slot = slot and slot or item.slot;
         slot = slot and slot or "Main Hand";
 
         local slotId = equipment_translateName(slot);
-        if (not slotId) then return end;
+        if (not slotId) then
+            return
+        end ;
 
         if (not bIgnoreDrop) then
             -- Drops the item on the entity's position.
-            SpawnItem(self:GetPos() + top, item,1);
+            SpawnItem(self:GetPos() + top, item, 1);
         end
 
         serverEquipment[entId][slotId] = nil;
@@ -121,14 +129,14 @@ if SERVER then
 
         if (self:IsPlayer()) then
             net.Start("UnequipItem")
-            net.WriteUInt(entId,32);
-            net.WriteUInt(slotId,7);
+            net.WriteUInt(entId, 32);
+            net.WriteUInt(slotId, 7);
             net.Send(self);
         end
     end
 
 else
-    net.Receive("EquipItem",function()
+    net.Receive("EquipItem", function()
         local entId = net.ReadUInt(32);
         local slotId = net.ReadUInt(7);
         local item = net.ReadTable(); -- Only provide itemClass and itemId
@@ -141,7 +149,7 @@ else
         reloadEquipmentMenu(entId);
     end)
 
-    net.Receive("UnequipItem",function()
+    net.Receive("UnequipItem", function()
         local entId = net.ReadUInt(32);
         local slotId = net.ReadUInt(7);
 
@@ -153,7 +161,7 @@ else
         reloadEquipmentMenu(entId);
     end)
 
-    net.Receive("TransmitEquipment",function()
+    net.Receive("TransmitEquipment", function()
         local entId = net.ReadUInt(32);
         local equipment = net.ReadTable(); -- Only provide itemClass and itemId
 
@@ -162,7 +170,7 @@ else
         reloadEquipmentMenu(entId);
     end)
 
-    net.Receive("ClearEquipment",function()
+    net.Receive("ClearEquipment", function()
         local entId = net.ReadUInt(32);
 
         serverEquipment[entId] = nil;
@@ -182,8 +190,10 @@ end
 ---@param entId number
 ---@param name string
 ---@return ITEM
-function getEquipmentSlot(entId,name)
-    if (type(name) == "string") then name = equipment_translateName(name) end
+function getEquipmentSlot(entId, name)
+    if (type(name) == "string") then
+        name = equipment_translateName(name)
+    end
     return getEquipment(entId)[name];
 end
 

@@ -16,16 +16,16 @@ local default_icon = Material("vgui/avatar_default");
 
 ---Init
 function PANEL:Init()
-    self.scrollablePanel = vgui.Create("DScrollPanel",self);
-    self.scrollablePanel:Dock( FILL );
+    self.scrollablePanel = vgui.Create("DScrollPanel", self);
+    self.scrollablePanel:Dock(FILL);
 end
 
 ---Paint
 ---@param w number
 ---@param h number
-function PANEL:Paint(w,h)
+function PANEL:Paint(w, h)
     setDrawColor(MAIN_BG_COLOR.r, MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
-    drawRect(0,0,w,h);
+    drawRect(0, 0, w, h);
 end
 
 ---PerformLayout
@@ -35,19 +35,22 @@ function PANEL:PerformLayout(_, _)
 end
 
 function PANEL:ReloadEquipment(entity)
-    if (not IsValid(entity)) then return end
+    if (not IsValid(entity)) then
+        return
+    end
 
     self.scrollablePanel:Clear();
 
     local entIndex = entity:EntIndex();
     local equipment = getEquipmentSlots();
 
-    for slotId,slotName in pairs(equipment) do
+    for slotId, slotName in pairs(equipment) do
         local item = getEquipmentSlot(entIndex, slotId);
 
         local slotPanel = self.scrollablePanel:Add("DPanel");
         slotPanel:Dock(TOP);
-        slotPanel.Paint = function() end;
+        slotPanel.Paint = function()
+        end;
 
         local slot = vgui.Create("DButton", slotPanel)
         slot:Dock(LEFT);
@@ -73,5 +76,4 @@ function PANEL:ReloadEquipment(entity)
     end
 end
 
-
-vgui.Register( "C13_Equipment", PANEL, "DPanel" );
+vgui.Register("C13_Equipment", PANEL, "DPanel");

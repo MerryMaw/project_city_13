@@ -7,7 +7,7 @@ It's primarily Garry's Mod, so it's probably Lua 5.1+.
 If you are a developer or moderator, you probably know it yourself.
 
 | Version | Supported          |
-| ------- | ------------------ |
+|---------|--------------------|
 | 5.1.x   | :white_check_mark: |
 | 5.0.x   | :x:                |
 | 4.0.x   | :x:                |

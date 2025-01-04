@@ -6,12 +6,11 @@
 
 AddCSLuaFile();
 
-DEFINE_BASECLASS( "c13_base_appliance" );
+DEFINE_BASECLASS("c13_base_appliance");
 
+ENT.PrintName = "C13 Test Appliance";
+ENT.Author = "The Maw";
+ENT.Purpose = "Test Appliance";
 
-ENT.PrintName		= "C13 Test Appliance";
-ENT.Author			= "The Maw";
-ENT.Purpose			= "Test Appliance";
-
-ENT.Durability      = 100
-ENT.PowerRequired   = 2;
+ENT.Durability = 100
+ENT.PowerRequired = 2;

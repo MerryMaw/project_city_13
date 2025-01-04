@@ -9,13 +9,15 @@ local range = 250 * 250;
 local startsWith = string.StartsWith;
 local intersect = table.intersect;
 
-hook.Add( "PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bTeam, plReceiver, plSpeaker)
-    print(text,bTeam,plReceiver,plSpeaker);
+hook.Add("PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bTeam, plReceiver, plSpeaker)
+    print(text, bTeam, plReceiver, plSpeaker);
 
-    if (not IsValid(plSpeaker)) then return true end;
+    if (not IsValid(plSpeaker)) then
+        return true
+    end ;
 
-    local plReceiverHeadset = getEquipmentSlot(plReceiver:EntIndex(),"Headset");
-    local plSpeakerHeadset = getEquipmentSlot(plSpeaker:EntIndex(),"Headset");
+    local plReceiverHeadset = getEquipmentSlot(plReceiver:EntIndex(), "Headset");
+    local plSpeakerHeadset = getEquipmentSlot(plSpeaker:EntIndex(), "Headset");
 
     local chl1 = {};
     local chl2 = {};
@@ -31,27 +33,33 @@ hook.Add( "PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bT
     end
 
     -- Intersect the 2 players' channels to find common ones.
-    local chInter = intersect(chl1,chl2);
+    local chInter = intersect(chl1, chl2);
 
     -- Find out if the text starts with any of the intersected channels.
     for ch, _ in pairs(chInter) do
-        if (startsWith(text,ch)) then
+        if (startsWith(text, ch)) then
             return true;
         end
     end
 
     -- If no common channels found, they can only hear them locally.
-    if (plReceiver:GetPos():DistToSqr(plSpeaker:GetPos()) < range) then return true end;
+    if (plReceiver:GetPos():DistToSqr(plSpeaker:GetPos()) < range) then
+        return true
+    end ;
 end)
 
-hook.Add( "PlayerSay", "PlayerSayC13", function( pl, text )
-    local plHeadset = getEquipmentSlot(pl:EntIndex(),"Headset");
+hook.Add("PlayerSay", "PlayerSayC13", function(pl, text)
+    local plHeadset = getEquipmentSlot(pl:EntIndex(), "Headset");
 
-    if (not plHeadset) then return text end;
-    if (not plHeadset.channels) then return text end;
+    if (not plHeadset) then
+        return text
+    end ;
+    if (not plHeadset.channels) then
+        return text
+    end ;
 
     for ch, chName in pairs(plHeadset.channels) do
-        if (startsWith(text,ch)) then
+        if (startsWith(text, ch)) then
             return chName .. ": " .. text;
         end
     end

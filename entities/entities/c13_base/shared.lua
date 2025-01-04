@@ -4,16 +4,16 @@
 --- DateTime: 12/20/24 10:17 PM
 ---
 
-DEFINE_BASECLASS( "base_anim" );
+DEFINE_BASECLASS("base_anim");
 
-ENT.PrintName		= "C13_BASE";
-ENT.Author			= "The Maw";
-ENT.Purpose			= "Provides base fundamentals for City 13 entities";
+ENT.PrintName = "C13_BASE";
+ENT.Author = "The Maw";
+ENT.Purpose = "Provides base fundamentals for City 13 entities";
 
-ENT.Model			= "models/props_lab/box01a.mdl"
+ENT.Model = "models/props_lab/box01a.mdl"
 
 --- Save an entire Network slot by reusing "SetHealth" and "SetMaxHealth".
-ENT.Durability      = 1;
+ENT.Durability = 1;
 
 ---SetupDataTables
 function ENT:SetupDataTables()

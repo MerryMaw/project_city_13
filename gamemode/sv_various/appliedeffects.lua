@@ -16,21 +16,25 @@ local lastRun;
 ---@param duration number
 function applyEffect(entity, dataEffect, duration)
     -- Duration is less or equal to 0, so no effect will apply?
-    if (duration <= 0) then return end
+    if (duration <= 0) then
+        return
+    end
 
     -- It is possible to apply an effect without an entity, such as other items.
     dataEffect.Entity = entity;
     dataEffect.EndTime = CurTime() + duration;
     dataEffect.LastTime = CurTime();
 
-    insert(entityWithEffects,dataEffect);
+    insert(entityWithEffects, dataEffect);
 end
 
 ---tickEffect
 local function tickEffect()
     local timeNow = CurTime();
 
-    if (lastRun and lastRun > timeNow) then return end
+    if (lastRun and lastRun > timeNow) then
+        return
+    end
 
     -- Don't run more than twice in 1 second. Performance reasons.
     lastRun = timeNow + 1;
@@ -49,7 +53,7 @@ local function tickEffect()
 
         -- If there is a tick to run, then run it.
         if (data.Tick) then
-            data.Tick(delta,data);
+            data.Tick(delta, data);
         end
 
         -- If the effect has expired, remove it from the watchlist.

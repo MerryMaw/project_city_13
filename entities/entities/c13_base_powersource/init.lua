@@ -4,7 +4,7 @@
 --- DateTime: 12/20/24 10:16 PM
 ---
 
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
+AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("shared.lua")
 
-include( 'shared.lua' )
+include('shared.lua')

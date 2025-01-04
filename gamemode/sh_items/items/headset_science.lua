@@ -4,11 +4,11 @@
 --- DateTime: 12/24/24 12:55 PM
 ---
 
-CLASS.name 				= "Headset Science";
-CLASS.Model             = "models/props_lab/clipboard.mdl";
+CLASS.name = "Headset Science";
+CLASS.Model = "models/props_lab/clipboard.mdl";
 
-CLASS.slot              = "Headset";
-CLASS.channels          = {
+CLASS.slot = "Headset";
+CLASS.channels = {
     [":r"] = "Science",
     [":c"] = "Common",
 }

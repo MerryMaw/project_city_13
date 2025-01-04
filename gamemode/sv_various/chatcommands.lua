@@ -17,48 +17,57 @@ chatCommands = chatCommands or {}
 ---addChatCommand
 ---@param command string
 ---@param funcCallback function
-function addChatCommand(command,funcCallback)
-    chatCommands["/"..command:gsub(" ","_"):lower()] = funcCallback
+function addChatCommand(command, funcCallback)
+    chatCommands["/" .. command:gsub(" ", "_"):lower()] = funcCallback
 end
 
-hook.Add( "PlayerSay", "ChatCommandsC13", function( ply, text, _ )
-    local args = explode(" ",text)
+hook.Add("PlayerSay", "ChatCommandsC13", function(ply, text, _)
+    local args = explode(" ", text)
     local command = args[1]:lower();
 
     if (chatCommands[command]) then
-        chatCommands[command](ply,concat(args," ",2))
+        chatCommands[command](ply, concat(args, " ", 2))
         return false;
     end
 end)
 
-addChatCommand("spawn",function(pl,str)
-    if (not pl:IsAdmin()) then return end
+addChatCommand("spawn", function(pl, str)
+    if (not pl:IsAdmin()) then
+        return
+    end
 
     local e = create(str)
 
-    if (not isValid(e)) then return end
+    if (not isValid(e)) then
+        return
+    end
 
-    e:SetPos(pl:GetEyeTrace().HitPos + Vector(0,0,20))
+    e:SetPos(pl:GetEyeTrace().HitPos + Vector(0, 0, 20))
     e:Spawn()
     e:Activate()
     e:DropToFloor()
 end)
 
-addChatCommand("spawnitem",function(pl,str)
-    if (not pl:IsAdmin()) then return end
+addChatCommand("spawnitem", function(pl, str)
+    if (not pl:IsAdmin()) then
+        return
+    end
 
     local item = createItem(str);
 
-    if (not item) then pl:ChatPrint("Item does not exist!") return end;
+    if (not item) then
+        pl:ChatPrint("Item does not exist!")
+        return
+    end ;
 
-    local pos = pl:GetEyeTrace().HitPos + Vector(0,0,20);
+    local pos = pl:GetEyeTrace().HitPos + Vector(0, 0, 20);
 
     pl:ChatPrint("Spawn item " .. item.name .. " at " .. tostring(pos));
 
-    SpawnItem(pos,item,1);
+    SpawnItem(pos, item, 1);
 end)
 
-addChatCommand("respawn",function(pl,str)
+addChatCommand("respawn", function(pl, str)
     local tPl;
 
     if (str and len(str) > 0 and pl:IsAdmin()) then

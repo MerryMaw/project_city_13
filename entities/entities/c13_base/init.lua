@@ -4,18 +4,18 @@
 --- DateTime: 12/20/24 10:16 PM
 ---
 
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
+AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("shared.lua")
 
-include( 'shared.lua' )
+include('shared.lua')
 
 ---Initialize
 function ENT:Initialize()
     self:SetModel(self.Model)
-    self:PhysicsInit( SOLID_VPHYSICS )
-    self:SetMoveType( MOVETYPE_VPHYSICS )
-    self:SetSolid( SOLID_VPHYSICS )
-    self:SetUseType( SIMPLE_USE )
+    self:PhysicsInit(SOLID_VPHYSICS)
+    self:SetMoveType(MOVETYPE_VPHYSICS)
+    self:SetSolid(SOLID_VPHYSICS)
+    self:SetUseType(SIMPLE_USE)
     self:PhysWake()
 
     self:SetHealth(self.Durability)

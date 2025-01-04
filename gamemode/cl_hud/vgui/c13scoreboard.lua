@@ -15,14 +15,14 @@ local simpleText = draw.SimpleText;
 
 ---Init
 function PANEL:Init()
-    self.Font 		= "c13_scoreboard"
-    self.Text		= ""
-    self.bannerH    = 100
+    self.Font = "c13_scoreboard"
+    self.Text = ""
+    self.bannerH = 100
 
     self:SetPaintBackgroundEnabled(false)
     self:SetPaintBorderEnabled(false)
 
-    self:DockPadding( 5, self.bannerH, 5, 5 )
+    self:DockPadding(5, self.bannerH, 5, 5)
 
     self.Pane = vgui.Create("DScrollPanel", self)
     self.Pane:Dock(FILL)
@@ -31,7 +31,7 @@ function PANEL:Init()
 
     self.Pane.VBar.Paint = function(_, _, _)
     end
-    
+
     self.Pane.VBar.btnGrip.Paint = function(_, w, h)
         setDrawColor(MAIN_SCOREBOARD_TEXT)
         drawRect(2, 2, w - 4, h - 4, MAIN_SCOREBOARD_TEXT)
@@ -45,13 +45,13 @@ end
 
 ---SetTitle
 ---@param title string
-function PANEL:SetTitle( title )
+function PANEL:SetTitle(title)
     self.Text = title
 end
 
 ---SetFont
 ---@param font string
-function PANEL:SetFont( font )
+function PANEL:SetFont(font)
     self.Font = font
 end
 
@@ -59,18 +59,20 @@ end
 function PANEL:populate()
     self.List:Clear()
 
-    for _,v in pairs(player.GetAll()) do
+    for _, v in pairs(player.GetAll()) do
         local a = self.List:Add("DPanel")
         a:SetText("")
         a:SetTall(22)
         a.Paint = function(_, W, H)
-            if (not IsValid(v)) then return end
+            if (not IsValid(v)) then
+                return
+            end
 
             setDrawColor(MAIN_BG_COLOR);
-            drawRect(0,0,W,H);
+            drawRect(0, 0, W, H);
 
-            simpleText(v:Nick(),"c13_normal",10,H/2,MAIN_TEXT_COLOR,nil,1)
-            simpleText(v:Ping(),"c13_normal",W-13,H/2,MAIN_TEXT_COLOR,2,1)
+            simpleText(v:Nick(), "c13_normal", 10, H / 2, MAIN_TEXT_COLOR, nil, 1)
+            simpleText(v:Ping(), "c13_normal", W - 13, H / 2, MAIN_TEXT_COLOR, 2, 1)
         end
     end
 end
@@ -88,9 +90,11 @@ end
 ---@param _ number
 ---@return boolean
 function PANEL:PaintOver(w, _)
-    if (not self.Text or #self.Text <= 0) then return true end
+    if (not self.Text or #self.Text <= 0) then
+        return true
+    end
 
-    simpleText(self.Text,self.Font,w/2,self.bannerH/2,MAIN_TEXT_COLOR,1,1)
+    simpleText(self.Text, self.Font, w / 2, self.bannerH / 2, MAIN_TEXT_COLOR, 1, 1)
 
     return true
 end

@@ -7,11 +7,10 @@
 
 local PANEL = {}
 
-
 ---Init
 function PANEL:Init()
-    self:SetPaintBackgroundEnabled( false )
-    self:SetPaintBorderEnabled( false )
+    self:SetPaintBackgroundEnabled(false)
+    self:SetPaintBorderEnabled(false)
 end
 
-vgui.Register( "C13_ActionBar", PANEL, "DPanel" );
+vgui.Register("C13_ActionBar", PANEL, "DPanel");

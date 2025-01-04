@@ -11,10 +11,10 @@ local table = table;
 ---@param t2 table
 ---@return table
 ---@public
-function table.intersect(t1,t2)
+function table.intersect(t1, t2)
     local ret = {}
 
-    for k,_ in pairs(t2) do
+    for k, _ in pairs(t2) do
         if t1[k] ~= nil then
             ret[k] = t1[k]
         end

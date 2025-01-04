@@ -11,13 +11,15 @@ local sh = ScrH();
 if (not equipmentMenu) then
     equipmentMenu = vgui.Create("C13_Equipment")
     equipmentMenu:SetPos(50, sh / 2 - 200);
-    equipmentMenu:SetSize(400,400);
+    equipmentMenu:SetSize(400, 400);
     equipmentMenu:InvalidateLayout();
     equipmentMenu:SetVisible(false);
 end
 
 function GM:OnSpawnMenuOpen()
-    if (not equipmentMenu) then return end;
+    if (not equipmentMenu) then
+        return
+    end ;
 
     equipmentMenu:ReloadEquipment(LocalPlayer());
     equipmentMenu:SetVisible(true);
@@ -29,11 +31,15 @@ function GM:OnSpawnMenuClose()
 end
 
 function reloadEquipmentMenu(entIndex)
-    if (not equipmentMenu or not equipmentMenu:IsVisible()) then return end
+    if (not equipmentMenu or not equipmentMenu:IsVisible()) then
+        return
+    end
 
     local pl = LocalPlayer();
 
-    if (pl:EntIndex() ~= entIndex) then return end;
+    if (pl:EntIndex() ~= entIndex) then
+        return
+    end ;
 
     equipmentMenu:ReloadEquipment(pl);
 end

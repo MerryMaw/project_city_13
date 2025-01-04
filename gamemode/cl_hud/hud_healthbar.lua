@@ -15,7 +15,7 @@ local drawRect = surface.DrawRect;
 local sh = ScrH();
 
 local barX = 50;
-local barY = sh-70;
+local barY = sh - 70;
 
 ---drawHealthbar
 function drawHealthbar()
@@ -24,14 +24,14 @@ function drawHealthbar()
     local strCondition, textColor = getPlayerConditions(pl);
 
     setDrawColor(MAIN_BG_COLOR);
-    drawRect(barX,barY - 10,240,40);
+    drawRect(barX, barY - 10, 240, 40);
 
     setFont("HealthFont");
     setTextColor(MAIN_TEXT_COLOR);
-    setTextPos(barX + 10,barY);
+    setTextPos(barX + 10, barY);
     drawText("Health condition: ");
 
-    setTextPos(barX+160,barY);
+    setTextPos(barX + 160, barY);
     setTextColor(textColor);
     drawText(strCondition);
 end
@@ -56,5 +56,5 @@ function getPlayerConditions(pl)
         return "Great", MAIN_HEALTH_COLOR_GREAT;
     end
 
-    return "Unknown",MAIN_TEXT_COLOR;
+    return "Unknown", MAIN_TEXT_COLOR;
 end

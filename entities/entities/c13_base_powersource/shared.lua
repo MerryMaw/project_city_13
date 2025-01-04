@@ -4,16 +4,16 @@
 --- DateTime: 12/20/24 10:17 PM
 ---
 
-DEFINE_BASECLASS( "c13_base" );
+DEFINE_BASECLASS("c13_base");
 
-ENT.PrintName		= "C13_BASE_POWER_SOURCE";
-ENT.Author			= "The Maw";
-ENT.Purpose			= "Provides base fundamentals for City 13 entities, which provides power";
+ENT.PrintName = "C13_BASE_POWER_SOURCE";
+ENT.Author = "The Maw";
+ENT.Purpose = "Provides base fundamentals for City 13 entities, which provides power";
 
-ENT.Model			= "models/props_vehicles/generatortrailer01.mdl"
+ENT.Model = "models/props_vehicles/generatortrailer01.mdl"
 
-ENT.maxPowerGenerated  = 1;
-ENT.acceptedFuel    = {};
+ENT.maxPowerGenerated = 1;
+ENT.acceptedFuel = {};
 
 ---SetupDataTables
 function ENT:SetupDataTables()

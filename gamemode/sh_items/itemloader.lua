@@ -10,21 +10,21 @@ AddCSLuaFile("itemmanager.lua")
 include("itembase.lua")
 include("itemmanager.lua")
 
-local Folder  		= GM.Folder:gsub("gamemodes/","").."/gamemode/sh_items/items";
+local Folder = GM.Folder:gsub("gamemodes/", "") .. "/gamemode/sh_items/items";
 
 ---@type ITEM
-local classes		= {};
+local classes = {};
 
-local Class   		= file.Find(Folder.."/*.lua","LUA");
-local copy          = table.Copy;
+local Class = file.Find(Folder .. "/*.lua", "LUA");
+local copy = table.Copy;
 
-for _,v in pairs(Class) do
+for _, v in pairs(Class) do
     CLASS = {};
 
-    AddCSLuaFile(Folder.."/"..v);
-    include(Folder.."/"..v);
+    AddCSLuaFile(Folder .. "/" .. v);
+    include(Folder .. "/" .. v);
 
-    setmetatable( CLASS, getBaseClass() );
+    setmetatable(CLASS, getBaseClass());
 
     CLASS.__index = CLASS;
 

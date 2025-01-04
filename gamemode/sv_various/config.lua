@@ -124,7 +124,9 @@ local configLocation = configDir .. "/config.json";
 local function initializeConfig()
     local modConfig = "data/" .. configLocation;
 
-    if (not file.IsDir(configDir, "DATA")) then file.CreateDir(configDir) end;
+    if (not file.IsDir(configDir, "DATA")) then
+        file.CreateDir(configDir)
+    end ;
 
     GAME_CONFIG = DEFAULT_CONFIG;
 

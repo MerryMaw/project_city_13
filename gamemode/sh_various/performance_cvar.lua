@@ -15,7 +15,7 @@
 --gmod_mcore_test 1
 --host_thread_mode 2
 
-concommand.Add("c13_config",function(pl, _, arg)
+concommand.Add("c13_config", function(pl, _, arg)
     local b = tobool(arg[1]) and 1 or 0
 
     pl:ConCommand("cl_threaded_bone_setup " .. b)

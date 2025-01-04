@@ -4,26 +4,28 @@
 --- DateTime: 12/22/24 7:03 PM
 ---
 
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
+AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("shared.lua")
 
-include( 'shared.lua' )
+include('shared.lua')
 
-function ENT:Use( activator )
+function ENT:Use(activator)
     local item = self:GetItem();
 
-    if (not item or not IsValid(activator)) then return end
+    if (not item or not IsValid(activator)) then
+        return
+    end
 
     local entId = activator:EntIndex();
 
-    local mainHand = getEquipmentSlot(entId,"Main Hand");
-    local offHand = getEquipmentSlot(entId,"Off Hand");
+    local mainHand = getEquipmentSlot(entId, "Main Hand");
+    local offHand = getEquipmentSlot(entId, "Off Hand");
 
     if (not mainHand) then
-        activator:EquipItem(item,"Main Hand")
+        activator:EquipItem(item, "Main Hand")
         self:Remove();
     elseif (not offHand) then
-        activator:EquipItem(item,"Off Hand")
+        activator:EquipItem(item, "Off Hand")
         self:Remove();
     else
         --TODO: Add to inventory

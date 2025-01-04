@@ -4,11 +4,11 @@
 --- DateTime: 12/22/24 7:03 PM
 ---
 
-DEFINE_BASECLASS( "c13_base" );
+DEFINE_BASECLASS("c13_base");
 
-ENT.PrintName		= "C13_BASE_ITEM";
-ENT.Author			= "The Maw";
-ENT.Purpose			= "Provides base fundamentals for City 13 items. Dropped items inherit this class!";
+ENT.PrintName = "C13_BASE_ITEM";
+ENT.Author = "The Maw";
+ENT.Purpose = "Provides base fundamentals for City 13 items. Dropped items inherit this class!";
 
 ---SetupDataTables
 function ENT:SetupDataTables()
