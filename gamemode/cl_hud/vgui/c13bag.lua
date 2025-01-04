@@ -19,6 +19,7 @@ local drawText = surface.DrawText;
 function PANEL:Init()
     self.Font = "c13_normal"
     self.Text = ""
+    self.Items = {};
 
     self:SetPaintBackgroundEnabled(false)
     self:SetPaintBorderEnabled(false)
@@ -34,6 +35,12 @@ end
 ---@param font string
 function PANEL:SetFont(font)
     self.Font = font
+end
+
+---setItems
+---@param itemData table
+function PANEL:setItem(itemData)
+    self.Item = itemData;
 end
 
 ---Paint

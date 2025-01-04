@@ -203,6 +203,65 @@ function clearEquipment(entId)
     serverEquipment[entId] = nil;
 end
 
+---isItemHeldByItem
+---@param item ITEM
+---@param itemId number
+---@return boolean
+function isItemHeldByItem(item,itemId)
+    local items = item:getItems();
+    local afterChecks = {};
+    local counter = 0;
+
+    -- Check the immediate contents of the bag
+    for _,subitem in pairs(items) do
+        if (subitem and subitem:getID() == itemId) then
+            return true;
+        elseif (subitem and subitem.isContainer) then
+            counter = counter+1;
+            afterChecks[counter] = subitem;
+        end
+    end
+
+    -- Recursively check the contents of the bag within a bag.
+    for _, subitem in ipairs(afterChecks) do
+        if (isItemHeldByItem(subitem,itemId)) then
+            return true;
+        end
+    end
+
+    return false;
+end
+
+
+---isItemHeldByEntId
+---@param entId number
+---@param itemId number
+---@return boolean
+function isItemHeldByEntId(entId, itemId)
+    local equipment = getEquipment(entId);
+    local afterChecks = {};
+    local counter = 0;
+
+    -- Check the immediate equipment slots.
+    for _,slot in pairs(equipment) do
+        if (slot and slot:getID() == itemId) then
+            return true;
+        elseif (slot and slot.isContainer) then
+            counter = counter+1;
+            afterChecks[counter] = slot;
+        end
+    end
+
+    -- Check the containers inside the slots.
+    for _, subitem in ipairs(afterChecks) do
+        if (isItemHeldByItem(subitem,itemId)) then
+            return true;
+        end
+    end
+
+    return false;
+end
+
 ---getEquipmentSlots
 ---@return table
 function getEquipmentSlots()

@@ -12,6 +12,7 @@ AddCSLuaFile("cl_hud/vgui/c13actionbar.lua");
 AddCSLuaFile("cl_hud/vgui/c13chatbox.lua");
 AddCSLuaFile("cl_hud/vgui/c13scoreboard.lua");
 
+AddCSLuaFile("cl_hud/hud_bag.lua");
 AddCSLuaFile("cl_hud/hud_equipment.lua");
 AddCSLuaFile("cl_hud/hud_job_picker.lua");
 AddCSLuaFile("cl_hud/hud_healthbar.lua");

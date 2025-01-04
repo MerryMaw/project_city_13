@@ -78,3 +78,10 @@ if (SERVER) then
         return e;
     end
 end
+
+---getItemByID
+---@param ID number
+---@return ITEM
+function getItemByID(ID)
+    return itemsInGame[ID];
+end

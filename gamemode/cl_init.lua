@@ -11,6 +11,7 @@ include("cl_hud/vgui/c13actionbar.lua");
 include("cl_hud/vgui/c13chatbox.lua");
 include("cl_hud/vgui/c13scoreboard.lua");
 
+include("cl_hud/hud_bag.lua");
 include("cl_hud/hud_equipment.lua");
 include("cl_hud/hud_job_picker.lua");
 include("cl_hud/hud_healthbar.lua");
