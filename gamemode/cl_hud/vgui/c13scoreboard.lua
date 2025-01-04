@@ -15,8 +15,14 @@ local simpleText = draw.SimpleText;
 
 ---Init
 function PANEL:Init()
+    self.Font 		= "c13_scoreboard"
+    self.Text		= ""
+    self.bannerH    = 100
+
     self:SetPaintBackgroundEnabled(false)
     self:SetPaintBorderEnabled(false)
+
+    self:DockPadding( 5, self.bannerH, 5, 5 )
 
     self.Pane = vgui.Create("DScrollPanel", self)
     self.Pane:Dock(FILL)
@@ -37,6 +43,18 @@ function PANEL:Init()
     self.List:Dock(FILL)
 end
 
+---SetTitle
+---@param title string
+function PANEL:SetTitle( title )
+    self.Text = title
+end
+
+---SetFont
+---@param font string
+function PANEL:SetFont( font )
+    self.Font = font
+end
+
 ---populate
 function PANEL:populate()
     self.List:Clear()
@@ -55,6 +73,26 @@ function PANEL:populate()
             simpleText(v:Ping(),"c13_normal",W-13,H/2,MAIN_TEXT_COLOR,2,1)
         end
     end
+end
+
+---Paint
+---@param _ number
+---@param _ number
+function PANEL:Paint(_, _)
+    --setDrawColor(MAIN_BG_COLOR.r, MAIN_BG_COLOR.g, MAIN_BG_COLOR.b, MAIN_BG_COLOR.a);
+    --drawRect(0,0,w,h);
+end
+
+---PaintOver
+---@param w number
+---@param _ number
+---@return boolean
+function PANEL:PaintOver(w, _)
+    if (not self.Text or #self.Text <= 0) then return true end
+
+    simpleText(self.Text,self.Font,w/2,self.bannerH/2,MAIN_TEXT_COLOR,1,1)
+
+    return true
 end
 
 vgui.Register("C13_Scoreboard", PANEL, "DPanel");

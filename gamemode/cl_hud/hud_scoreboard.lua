@@ -2,8 +2,7 @@
 
 -- local sw,sh = ScrW(),ScrH()
 
-local off_h = 100;
-local ssw,ssh = 800,300
+local ssw,ssh = 800,400
 
 Scoreboard_VGUI = Scoreboard_VGUI or nil;
 
@@ -11,13 +10,11 @@ Scoreboard_VGUI = Scoreboard_VGUI or nil;
 function GM:ScoreboardShow()
     if (not Scoreboard_VGUI) then
         Scoreboard_VGUI = vgui.Create("C13_Scoreboard")
-        Scoreboard_VGUI:SetSize(ssw,ssh+off_h)
+        Scoreboard_VGUI:SetSize(ssw,ssh);
         Scoreboard_VGUI:SetTitle(self.Name);
-        Scoreboard_VGUI:SetFont("c13_normal")
         Scoreboard_VGUI:MakePopup()
         Scoreboard_VGUI:SetAlpha(0)
         Scoreboard_VGUI:Center()
-        Scoreboard_VGUI:DockPadding( 5, off_h, 5, 5 )
     end
 
     Scoreboard_VGUI:populate();
