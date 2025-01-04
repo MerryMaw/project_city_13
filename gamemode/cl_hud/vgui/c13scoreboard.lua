@@ -6,11 +6,55 @@
 
 local PANEL = {}
 
+local IsValid = IsValid;
+
+local setDrawColor = surface.SetDrawColor;
+local drawRect = surface.DrawRect;
+
+local simpleText = draw.SimpleText;
 
 ---Init
 function PANEL:Init()
-    self:SetPaintBackgroundEnabled( false )
-    self:SetPaintBorderEnabled( false )
+    self:SetPaintBackgroundEnabled(false)
+    self:SetPaintBorderEnabled(false)
+
+    self.Pane = vgui.Create("DScrollPanel", self)
+    self.Pane:Dock(FILL)
+    self.Pane.Paint = function(_, _, _)
+    end
+
+    self.Pane.VBar.Paint = function(_, _, _)
+    end
+    
+    self.Pane.VBar.btnGrip.Paint = function(_, w, h)
+        setDrawColor(MAIN_SCOREBOARD_TEXT)
+        drawRect(2, 2, w - 4, h - 4, MAIN_SCOREBOARD_TEXT)
+    end
+    self.Pane.VBar.btnDown.Paint = self.Pane.VBar.btnGrip.Paint
+    self.Pane.VBar.btnUp.Paint = self.Pane.VBar.btnGrip.Paint
+
+    self.List = vgui.Create("DListLayout", self.Pane)
+    self.List:Dock(FILL)
 end
 
-vgui.Register( "C13_Scoreboard", PANEL, "DPanel" );
+---populate
+function PANEL:populate()
+    self.List:Clear()
+
+    for _,v in pairs(player.GetAll()) do
+        local a = self.List:Add("DPanel")
+        a:SetText("")
+        a:SetTall(22)
+        a.Paint = function(_, W, H)
+            if (not IsValid(v)) then return end
+
+            setDrawColor(MAIN_BG_COLOR);
+            drawRect(0,0,W,H);
+
+            simpleText(v:Nick(),"c13_normal",10,H/2,MAIN_TEXT_COLOR,nil,1)
+            simpleText(v:Ping(),"c13_normal",W-13,H/2,MAIN_TEXT_COLOR,2,1)
+        end
+    end
+end
+
+vgui.Register("C13_Scoreboard", PANEL, "DPanel");
