@@ -1,24 +1,13 @@
-AddCSLuaFile("sh_items/itemloader.lua");
+AddCSLuaFile("autolua.lua")
+include("autolua.lua")
 
-AddCSLuaFile("sh_various/table_ext.lua");
-AddCSLuaFile("sh_various/equipment.lua");
-AddCSLuaFile("sh_various/performance_cvar.lua");
-AddCSLuaFile("sh_various/game_rounds.lua");
-AddCSLuaFile("sh_various/containerbags.lua");
+addLuaSHFolder("sh_items");
+addLuaSHFolder("sh_various");
+addLuaSHFolder("sh_player");
 
-AddCSLuaFile("sh_player/player_health_conditions.lua");
-AddCSLuaFile("sh_player/player_job_picker.lua");
-
-include("sh_items/itemloader.lua");
-
-include("sh_various/table_ext.lua");
-include("sh_various/equipment.lua");
-include("sh_various/performance_cvar.lua");
-include("sh_various/game_rounds.lua");
-include("sh_various/containerbags.lua");
-
-include("sh_player/player_health_conditions.lua");
-include("sh_player/player_job_picker.lua");
+addLuaCSFolder("cl_various");
+addLuaCSFolder("cl_hud/vgui");
+addLuaCSFolder("cl_hud");
 
 GM.Name = "Project City 13"
 GM.Author = "The Maw"
