@@ -37,7 +37,10 @@ function SWEP:PrimaryAttack()
         return
     end
 
-    local item = getEquipmentSlot(self.Owner:EntIndex(), "Main Hand");
+    ---@type number
+    local entId = self.Owner:EntIndex();
+
+    local item = getEquipmentSlotByName(entId, "Main Hand");
 
     if (not item) then
         return
@@ -52,7 +55,10 @@ function SWEP:SecondaryAttack()
         return
     end
 
-    local item = getEquipmentSlot(self.Owner:EntIndex(), "Off Hand");
+    ---@type number
+    local entId = self.Owner:EntIndex();
+
+    local item = getEquipmentSlotByName(entId, "Off Hand");
 
     if (not item) then
         return

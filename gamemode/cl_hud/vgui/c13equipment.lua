@@ -34,6 +34,8 @@ end
 function PANEL:PerformLayout(_, _)
 end
 
+---ReloadEquipment
+---@param entity userdata
 function PANEL:ReloadEquipment(entity)
     if (not IsValid(entity)) then
         return
@@ -41,11 +43,12 @@ function PANEL:ReloadEquipment(entity)
 
     self.scrollablePanel:Clear();
 
+    ---@type number
     local entIndex = entity:EntIndex();
     local equipment = getEquipmentSlots();
 
     for slotId, slotName in pairs(equipment) do
-        local item = getEquipmentSlot(entIndex, slotId);
+        local item = getEquipmentSlotById(entIndex, slotId);
 
         local slotPanel = self.scrollablePanel:Add("DPanel");
         slotPanel:Dock(TOP);

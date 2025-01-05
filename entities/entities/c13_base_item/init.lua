@@ -18,8 +18,8 @@ function ENT:Use(activator)
 
     local entId = activator:EntIndex();
 
-    local mainHand = getEquipmentSlot(entId, "Main Hand");
-    local offHand = getEquipmentSlot(entId, "Off Hand");
+    local mainHand = getEquipmentSlotByName(entId, "Main Hand");
+    local offHand = getEquipmentSlotByName(entId, "Off Hand");
 
     if (not mainHand) then
         activator:EquipItem(item, "Main Hand")

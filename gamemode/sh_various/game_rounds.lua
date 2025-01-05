@@ -4,8 +4,11 @@
 --- DateTime: 12/28/24 5:41 PM
 ---
 
-roundCountDown = roundCountDown or nil;
-gameOn = gameOn or false;
+---@type number
+local roundCountDown;
+
+---@type boolean
+local gameOn = false;
 
 local CurTime = CurTime;
 local floor = math.floor;
@@ -22,6 +25,7 @@ if (SERVER) then
 
     ---restartRound
     function restartRound()
+        ---@type number
         local now = CurTime();
 
         roundCountDown = now + defaultStartTime;
@@ -71,7 +75,13 @@ if (SERVER) then
     end
 else
     net.Receive("RoundStart", function()
-        roundCountDown = CurTime() + net.ReadUInt(8);
+        ---@type number
+        local now = CurTime();
+
+        ---@type number
+        local duration = net.ReadUInt(8);
+
+        roundCountDown = now + duration;
     end)
 end
 
@@ -82,7 +92,9 @@ function getRoundCountdown()
 end
 
 ---getRoundStarted
----@return number
+---@return boolean
 function getRoundStarted()
-    return roundCountDown < CurTime();
+    ---@type number
+    local now = CurTime();
+    return roundCountDown < now;
 end

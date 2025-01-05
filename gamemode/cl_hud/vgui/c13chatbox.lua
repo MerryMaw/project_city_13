@@ -31,7 +31,10 @@ function PANEL:Init()
     self.TextEntry:Dock(BOTTOM)
     self.TextEntry:SetFont("c13_chatfont")
     self.TextEntry.OnEnter = function(s)
-        chat.AddText(s:GetValue())
+        ---@type string
+        local text = s:GetValue();
+
+        chat.AddText(text);
     end
 
     -- From Wiki Garrysmod
@@ -41,9 +44,11 @@ function PANEL:Init()
             self:close();
             gui.HideGameUI()
         elseif code == KEY_ENTER then
+            ---@type string
+            local text = self2:GetText();
             -- Replicate the client pressing enter
-            if trim(self2:GetText()) ~= "" then
-                LocalPlayer():ConCommand("say " .. self2:GetText())
+            if trim(text) ~= "" then
+                LocalPlayer():ConCommand("say " .. text)
             end
 
             self:close();

@@ -6,7 +6,8 @@
 
 serverEquipment = serverEquipment or {};
 
-local type = type;
+---@type function
+local lower = string.lower;
 local top = Vector(0, 0, 20);
 -- This should be universal for every object, not just players.
 local meta = FindMetaTable("Entity");
@@ -23,11 +24,12 @@ slotIDs[8] = "Legs";
 slotIDs[9] = "Main Hand";
 slotIDs[10] = "Off Hand";
 
+---@type table
 local slotNameToIDs = {}
 
 --- Reverse the IDs to a NameToID map for speedier performance.
 for k, v in pairs(slotIDs) do
-    slotNameToIDs[v:lower()] = k;
+    slotNameToIDs[lower(v)] = k;
 end
 
 ---equipment_translateID
@@ -186,15 +188,21 @@ function getEquipment(entId)
     return serverEquipment[entId] or {};
 end
 
----getEquipmentSlot
+---getEquipmentSlotByName
 ---@param entId number
 ---@param name string
 ---@return ITEM
-function getEquipmentSlot(entId, name)
-    if (type(name) == "string") then
-        name = equipment_translateName(name)
-    end
-    return getEquipment(entId)[name];
+function getEquipmentSlotByName(entId, name)
+    local slotId = equipment_translateName(name);
+    return getEquipmentSlotById(entId, slotId);
+end
+
+---getEquipmentSlotByName
+---@param entId number
+---@param slotId number
+---@return ITEM
+function getEquipmentSlotById(entId, slotId)
+    return getEquipment(entId)[slotId];
 end
 
 ---clearEquipment

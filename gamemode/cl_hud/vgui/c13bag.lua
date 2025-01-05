@@ -7,7 +7,9 @@
 
 local PANEL = {}
 
+---@type function
 local setDrawColor = surface.SetDrawColor;
+
 local drawRect = surface.DrawRect;
 
 local setTextColor = surface.SetTextColor;

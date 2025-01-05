@@ -16,8 +16,8 @@ hook.Add("PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bTe
         return true
     end ;
 
-    local plReceiverHeadset = getEquipmentSlot(plReceiver:EntIndex(), "Headset");
-    local plSpeakerHeadset = getEquipmentSlot(plSpeaker:EntIndex(), "Headset");
+    local plReceiverHeadset = getEquipmentSlotByName(plReceiver:EntIndex(), "Headset");
+    local plSpeakerHeadset = getEquipmentSlotByName(plSpeaker:EntIndex(), "Headset");
 
     local chl1 = {};
     local chl2 = {};
@@ -49,7 +49,7 @@ hook.Add("PlayerCanSeePlayersChat", "CheckPlayerChannelsC13", function(text, bTe
 end)
 
 hook.Add("PlayerSay", "PlayerSayC13", function(pl, text)
-    local plHeadset = getEquipmentSlot(pl:EntIndex(), "Headset");
+    local plHeadset = getEquipmentSlotByName(pl:EntIndex(), "Headset");
 
     if (not plHeadset) then
         return text

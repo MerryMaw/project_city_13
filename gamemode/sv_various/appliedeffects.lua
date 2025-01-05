@@ -9,14 +9,22 @@ entityWithEffects = entityWithEffects or {};
 local insert = table.insert;
 local yield = coroutine.yield;
 local resume = coroutine.resume;
+
+---@type function
 local CurTime = CurTime;
+
+---@type thread
 local routine;
+
+---@type number
 local lastRun;
+
+---@type number
 local tickDelay = 0.01;
 
 ---applyEffect
 ---@param entity userdata
----@param dataEffect void
+---@param dataEffect table
 ---@param duration number
 function applyEffect(entity, dataEffect, duration)
     -- Duration is less or equal to 0, so no effect will apply?
@@ -38,6 +46,7 @@ local function tickEffect()
         if (not next(entityWithEffects)) then
             yield();
         else
+            ---@param data table
             for id, data in pairs(entityWithEffects) do
                 yield();
 
@@ -68,7 +77,9 @@ local function tickEffect()
 end
 
 hook.Add("Tick", "effectTicks", function()
+    ---@type number
     local now = CurTime();
+
     if (lastRun and lastRun > now) then
         return
     end

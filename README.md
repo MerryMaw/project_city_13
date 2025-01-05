@@ -5,7 +5,7 @@
 The gamemode will load configurations from data/c13/config.json. It will be generated upon first time loading.
 
 The gamemode works stand alone and does not require any special maps or addons to function. It can be configured through
-config files entirely or generated map config files ingame on a map (or multiple maps) of your choosing.
+config files entirely or generated map config files in game on a map (or multiple maps) of your choosing.
 
 It uses SQLite as database, not that there is much to store, as the gamemode is round based. You can configure the
 SQLite configurations from the config.json file.
@@ -18,7 +18,7 @@ later on in the game.
 
 ## Rules
 
-Server rules I guess..
+Server rules I guess.
 
 ## Credits
 

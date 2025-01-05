@@ -23,6 +23,7 @@ local function openChatbox()
 end
 
 hook.Add("PlayerBindPress", "c13_chatBinds", function(_, bind, _)
+    ---@type boolean
     local bTeam;
 
     if (bind == "messagemode") then
@@ -43,7 +44,6 @@ end)
 ---@param _ string
 ---@param text string
 ---@param type string
----@return boolean
 function GM:ChatText(_, _, text, type)
     if type == "joinleave" or type == "none" then
         chatBox.RichText:AppendText(text .. "\n")
