@@ -7,34 +7,49 @@
 ---AddLuaCSFolder
 ---@param directory string
 function addLuaCSFolder(directory)
-    local Dir 		= GM.Folder:gsub("gamemodes/","").."/gamemode/"
-    local files 	= file.Find(Dir.. directory .."/*.lua","LUA")
+    local Dir = GM.Folder:gsub("gamemodes/", "") .. "/gamemode/"
+    local files = file.Find(Dir .. directory .. "/*.lua", "LUA")
 
-    for _,v in pairs( files ) do
-        if (CLIENT) then include(Dir.. directory .."/"..v)
-        else AddCSLuaFile(Dir.. directory .."/"..v) end
+    for _, v in pairs(files) do
+        local dir = Dir .. directory .. "/" .. v;
+        if (CLIENT) then
+            print("[AUTOLUA] CLIENT Included File ",dir);
+            include(dir)
+        else
+            print("[AUTOLUA] CLIENT Added CS File ",dir);
+            AddCSLuaFile(dir)
+        end
     end
 end
 
 ---AddLuaSVFolder
 ---@param directory string
 function addLuaSVFolder(directory)
-    local Dir 		= GM.Folder:gsub("gamemodes/","").."/gamemode/"
-    local files	= file.Find(Dir.. directory .."/*.lua","LUA")
+    local Dir = GM.Folder:gsub("gamemodes/", "") .. "/gamemode/"
+    local files = file.Find(Dir .. directory .. "/*.lua", "LUA")
 
-    for _,v in pairs( files ) do
-        if (SERVER) then include(Dir.. directory .."/"..v) end
+    for _, v in pairs(files) do
+        local dir = Dir .. directory .. "/" .. v;
+        if (SERVER) then
+            print("[AUTOLUA] SERVER Included File ",dir);
+            include(dir)
+        end
     end
 end
 
 ---AddLuaSHFolder
 ---@param directory string
 function addLuaSHFolder(directory)
-    local Dir 		= GM.Folder:gsub("gamemodes/","").."/gamemode/"
-    local files 	= file.Find(Dir.. directory .."/*.lua","LUA")
+    local Dir = GM.Folder:gsub("gamemodes/", "") .. "/gamemode/"
+    local files = file.Find(Dir .. directory .. "/*.lua", "LUA")
 
-    for _,v in pairs( files ) do
-        if (SERVER) then AddCSLuaFile(Dir.. directory .."/"..v) end
-        include(Dir.. directory .."/"..v)
+    for _, v in pairs(files) do
+        local dir = Dir .. directory .. "/" .. v;
+        if (SERVER) then
+            print("[AUTOLUA] SHARED Added CS File ",dir);
+            AddCSLuaFile(dir)
+        end
+        print("[AUTOLUA] SHARED Included File ",dir);
+        include(dir)
     end
 end
