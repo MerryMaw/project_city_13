@@ -6,6 +6,9 @@
 
 bagGUI = bagGUI or nil;
 
+---openBag
+---@param containerItem ITEM
+---@return nil
 function openBag(containerItem)
     if (not bagGUI) then
         bagGUI = vgui.Create("C13_Bag");

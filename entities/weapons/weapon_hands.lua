@@ -41,7 +41,7 @@ function SWEP:PrimaryAttack()
 
     if (not item) then
         return
-    end ;
+    end
 
     item:use(self.Owner);
 end
@@ -56,7 +56,7 @@ function SWEP:SecondaryAttack()
 
     if (not item) then
         return
-    end ;
+    end
 
     item:use(self.Owner);
 end
